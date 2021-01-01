@@ -2,12 +2,15 @@ import React from 'react';
 import SelectStudio from './SelectStudio';
 import AddStudio from './AddStudio';
 
-function TeacherLanding() {
+const TeacherLanding = (props) => {
+
+  const studios = props.data.studios;
 
   return (
 
     <div className="col-10 d-flex flex-column mt-5">
-      <SelectStudio />
+      {/* {console.log(studios)} */}
+      <SelectStudio studios={studios} />
       <AddStudio />
     </div>
 

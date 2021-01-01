@@ -33,19 +33,22 @@ const studentSchema = new mongoose.Schema({
   },
   'assignments': [assignmentSchema],
   'goals': [
-    'title': String,
-    'body': String
+    {
+      'title': String,
+      'body': String
+    }
   ],
-  'instructor_notes': [
-    'title': String,
-    'body': String
+  'instructorNotes': [
+    {
+      'body': String
+    }
   ]
 });
 
 const Student = mongoose.model('Student', studentSchema);
 
 const studioSchema = new mongoose.Schema({
-  'name': {
+  'studioName': {
     type: String,
     required: true
   },
@@ -76,7 +79,7 @@ studioSchema.pre('validate', function(next) {
 const Studio = mongoose.model('Studio', studioSchema);
 
 const teacherSchema = new mongoose.Schema({
-  'name': {
+  'teacherName': {
     type: String,
     required: true
   },

@@ -1,23 +1,29 @@
 import React, { useState } from 'react';
+import goButton from './goButton';
 
-function SelectStudio() {
+function SelectStudio({ studios }) {
 
   const [studio, setStudio] = useState('');
 
   const handleChange = (e) => {
-    setStudio(e.target.value)
+    const url = '/teacher/' + e.target.value.toLowerCase().replace(/\s+/g, '');
+    setStudio(url);
   }
 
   return (
-    <div className="row">
-      {console.log({studio})}
-      <label htmlFor="#studioSelect">Select Studio</label>
-      <select name="" id="studioSelect" className="form-select" onChange={e => handleChange(e)}>
-        <option selected value="">Select an option...</option>
-        <option value="DePaul">DePaul</option>
-        <option value="HEHS">HEHS</option>
-        <option value="MIC">MIC</option>
-      </select>
+    <div className="row d-flex justify-content-center">
+      <form action="" className="form-inline">
+        {console.log({studios})}
+        {console.log({studio})}
+        <label className= "mr-3" htmlFor="#inlineFormStudioSelect">Select Studio</label>
+        <select name="" id="inlineFormStudioSelect" className="custom-select mr-3" onChange={e => handleChange(e)}>
+          <option selected value="">Select an option...</option>
+          {studios.map(studio => {
+            return <option value={studio.studioName}>{studio.studioName}</option>
+          })}
+        </select>
+        {goButton(studio)}
+      </form>
     </div>
   )
 }
