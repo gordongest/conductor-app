@@ -1,13 +1,19 @@
 import React from 'react';
 
-const StudioInfo = () => (
-  <div className="col d-flex flex-column">
-    <p>Name: RMHS</p>
-    <p>Location: 1100 W. Golf Rd Rolling Meadows, IL</p>
-    <p>No. of Students: 6</p>
-    <p>No. of Days: 1</p>
-    <p>Level: High School</p>
-  </div>
-)
+const StudioInfo = (props) => {
+
+  const data = props.data;
+
+  return (
+
+    <div className="col d-flex flex-column">
+      <h5 className="display-5">{data.studioName}</h5>
+      <p className="">{data.location}</p>
+      <p>No. of Students: {data.size}</p>
+      <p>Days: {data.days}</p>
+    </div>
+
+  )
+}
 
 export default StudioInfo;

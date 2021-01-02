@@ -18,6 +18,10 @@ class App extends Component {
     }
   }
 
+  componentDidMount() {
+    /* Put GET request here */
+  }
+
   render() {
 
     const studioData = this.state.data.dummyData.dummyData;
@@ -31,7 +35,8 @@ class App extends Component {
             <Switch>
               <Route exact path='/' render={() => <Landing />} />
               <Route exact path='/teacher' render={() => <TeacherLanding data={studioData} />} />
-              <Route exact path='/teacher/:studio' render={routeProps => <Studio studio={routeProps.match.params.name} />} />
+              <Route exact path='/teacher/:studio' render={routeProps => <Studio studios={studioData} data={routeProps} />} />
+              <Route exact path='/teacher/:studio/:student' render={() => <h1 className="mt-4 display-3">You found a student.</h1>} />
               <Route exact path='/students' render={() => <StudentLanding />} />
               <Route exact path='/students/:studio/:name' render={() => <StudentHome />} />
             </Switch>

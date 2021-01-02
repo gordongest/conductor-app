@@ -19,11 +19,33 @@ const AddStudio = () => (
               </button>
             </div>
             <div className="modal-body">
-              ADD STUDIO FORM
+              <form>
+                <div className="form-group">
+                  <label htmlFor="studioName">Studio Name:</label>
+                  <input type="text" className="form-control" id="studioName" placeholder="Enter name" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="location">Location:</label>
+                  <input type="text" className="form-control" id="studioLocation" placeholder="Enter location" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="daySelect">Days:</label>
+                  <select multiple type="text" className="form-control" id="studioDays">
+                    <option>Select days...</option>
+                    <option value='Monday'>Monday</option>
+                    <option value='Tuesday'>Tuesday</option>
+                    <option value='Wednesday'>Wednesday</option>
+                    <option value='Thursday'>Thursday</option>
+                    <option value='Friday'>Friday</option>
+                    <option value='Saturday'>Saturday</option>
+                    <option value='Sunday'>Sunday</option>
+                  </select>
+                </div>
+              </form>
             </div>
             <div className="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-primary" onClick={() => console.log('clíkk')}>Save changes</button>
             </div>
           </div>
         </div>

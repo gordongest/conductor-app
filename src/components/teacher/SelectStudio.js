@@ -19,7 +19,7 @@ function SelectStudio({ studios }) {
         <select name="" id="inlineFormStudioSelect" className="custom-select mr-3" onChange={e => handleChange(e)}>
           <option selected value="">Select an option...</option>
           {studios.map(studio => {
-            return <option value={studio.studioName}>{studio.studioName}</option>
+            return <option value={studio.id}>{studio.studioName}</option>
           })}
         </select>
         {goButton(studio)}

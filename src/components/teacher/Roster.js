@@ -1,14 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Roster = () => (
-  <div className="col d-flex flex-column">
-    <p>Greg Jones</p>
-    <p>Brooke Myers</p>
-    <p>Alex Farmer</p>
-    <p>Jessie Hurd</p>
-    <p>Mike Hutchins</p>
-    <p>Cora Nadal</p>
-  </div>
-)
+const Roster = (props) => {
+
+  const roster = props.roster;
+
+  return (
+    <div className="col d-flex flex-column">
+    {/* {console.log(props.studio)} */}
+    {roster.map(student => {
+      return <Link to={`/teacher/${props.studio}/${student.name}`}><p>{student.name}</p></Link>
+    })}
+    </div>
+  )
+}
 
 export default Roster;
