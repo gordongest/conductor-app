@@ -7,15 +7,16 @@ const Studio = (props) => {
 
   const studios = props.studios[0].dummyData.dummyData.studios;
   const selected = studios.filter(studio => {
-    return studio.id === Number(props.data.match.params.studio);
-  })[0]
+    return studio.studioName.toLowerCase().replace(/\s+/g, '') === props.data.match.params.studio;
+  })[0];
+  const selectedName = selected.studioName.toLowerCase().replace(/\s+/g, '');
 
   return (
     <div className="col-10">
     {console.log(selected)}
       <div className="row mt-5">
         <StudioInfo data={selected} />
-        <Roster roster={selected.students} studio={selected.id} />
+        <Roster roster={selected.students} studio={selectedName} />
         <AddStudent id={selected.id} />
       </div>
     </div>

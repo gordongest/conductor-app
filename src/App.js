@@ -12,11 +12,12 @@ import dummyData from './dummyData';
 const App = function(props) {
 
   const [ studioData, setStudioData ] = useState([{dummyData}]);
+  const [ selected, setSelected ] = useState(null);
   const [ student, setStudent ] = useState(null);
 
   return (
     <div>
-      {console.log(studioData)}
+      {/* {console.log(studioData)} */}
       <Navbar />
       <div className="container">
         <div className="row justify-content-center">
