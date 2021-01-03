@@ -1,6 +1,7 @@
 import React from 'react';
 
-function AddStudent() {
+const AddStudent = () => {
+
   return (
 
     <div className="row">

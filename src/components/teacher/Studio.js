@@ -3,21 +3,14 @@ import StudioInfo from './StudioInfo';
 import Roster from './Roster';
 import AddStudent from './AddStudent';
 
-const Studio = (props) => {
-
-  const studios = props.studios[0].dummyData.dummyData.studios;
-  const selected = studios.filter(studio => {
-    return studio.studioName.toLowerCase().replace(/\s+/g, '') === props.data.match.params.studio;
-  })[0];
-  const selectedName = selected.studioName.toLowerCase().replace(/\s+/g, '');
+const Studio = ({ selectedStudio, handleStudentSelect }) => {
 
   return (
     <div className="col-10">
-    {console.log(selected)}
+    {console.log(selectedStudio)}
       <div className="row mt-5">
-        <StudioInfo data={selected} />
-        <Roster roster={selected.students} studio={selectedName} />
-        <AddStudent id={selected.id} />
+        <StudioInfo data={selectedStudio} />
+        <Roster studioName={selectedStudio.studioName} roster={selectedStudio.students} handleStudentSelect={handleStudentSelect} />
       </div>
     </div>
   )

@@ -14,14 +14,14 @@ const dummyData = {
           'level': 'lower intermediate',
           'assignments': [
             {
-              "name":"illum-aliquid-voluptatem",
+              "title":"illum-aliquid-voluptatem",
               "tempo":141,
               "dueDate": '2021-03-06T02:57:11.119Z',
               "completed":true,
               "notes":"Rerum ut vel inventore ducimus magnam debitis voluptas."
             },
             {
-              "name":"cum-debitis-dolores",
+              "title":"cum-debitis-dolores",
               "tempo":76,
               "dueDate":"2021-08-18T06:36:27.657Z",
               "completed":true,
@@ -46,14 +46,14 @@ const dummyData = {
           'level': 'beginner',
           'assignments': [
             {
-              "name":"modi-et-consequatur",
+              "title":"modi-et-consequatur",
               "tempo":128,
               "dueDate":"2021-08-04T10:45:06.837Z",
               "completed":false,
               "notes":"Repellendus reprehenderit minima voluptas nam dolor quo rerum."
             },
             {
-              "name":"nihil-laboriosam-minus",
+              "title":"nihil-laboriosam-minus",
               "tempo":84,
               "dueDate":"2021-10-28T12:50:04.700Z",
               "completed":false,
@@ -78,13 +78,13 @@ const dummyData = {
           'level': 'upper intermediate',
           'assignments': [
             {
-              "name":"cum-debitis-dolores",
+              "title":"cum-debitis-dolores",
               "tempo":96,
               "dueDate":"2021-08-18T06:36:27.657Z","completed":true,
               "notes":"Facere ullam quis ut illo harum sint laborum."
             },
             {
-              "name":"modi-et-consequatur",
+              "title":"modi-et-consequatur",
               "tempo":112,
               "dueDate":"2021-08-04T10:45:06.837Z",
               "completed":false,
@@ -118,14 +118,14 @@ const dummyData = {
           'level': 'upper intermediate',
           'assignments': [
             {
-              "name":"illum-aliquid-voluptatem",
+              "title":"illum-aliquid-voluptatem",
               "tempo":141,
               "dueDate": '2021-03-06T02:57:11.119Z',
               "completed":true,
               "notes":"Rerum ut vel inventore ducimus magnam debitis voluptas."
             },
             {
-              "name":"cum-debitis-dolores",
+              "title":"cum-debitis-dolores",
               "tempo":76,
               "dueDate":"2021-08-18T06:36:27.657Z",
               "completed":true,
@@ -150,14 +150,14 @@ const dummyData = {
           'level': 'advanced',
           'assignments': [
             {
-              "name":"modi-et-consequatur",
+              "title":"modi-et-consequatur",
               "tempo":128,
               "dueDate":"2021-08-04T10:45:06.837Z",
               "completed":false,
               "notes":"Repellendus reprehenderit minima voluptas nam dolor quo rerum."
             },
             {
-              "name":"nihil-laboriosam-minus",
+              "title":"nihil-laboriosam-minus",
               "tempo":84,
               "dueDate":"2021-10-28T12:50:04.700Z",
               "completed":false,
@@ -182,13 +182,13 @@ const dummyData = {
           'level': 'upper intermediate',
           'assignments': [
             {
-              "name":"cum-debitis-dolores",
+              "title":"cum-debitis-dolores",
               "tempo":96,
               "dueDate":"2021-08-18T06:36:27.657Z","completed":true,
               "notes":"Facere ullam quis ut illo harum sint laborum."
             },
             {
-              "name":"modi-et-consequatur",
+              "title":"modi-et-consequatur",
               "tempo":112,
               "dueDate":"2021-08-04T10:45:06.837Z",
               "completed":false,
@@ -213,14 +213,14 @@ const dummyData = {
           'level': 'advanced',
           'assignments': [
             {
-              "name":"modi-et-consequatur",
+              "title":"modi-et-consequatur",
               "tempo":128,
               "dueDate":"2021-08-04T10:45:06.837Z",
               "completed":false,
               "notes":"Repellendus reprehenderit minima voluptas nam dolor quo rerum."
             },
             {
-              "name":"nihil-laboriosam-minus",
+              "title":"nihil-laboriosam-minus",
               "tempo":84,
               "dueDate":"2021-10-28T12:50:04.700Z",
               "completed":false,
@@ -254,14 +254,14 @@ const dummyData = {
           'level': 'upper intermediate',
           'assignments': [
             {
-              "name":"illum-aliquid-voluptatem",
+              "title":"illum-aliquid-voluptatem",
               "tempo":141,
               "dueDate": '2021-03-06T02:57:11.119Z',
               "completed":true,
               "notes":"Rerum ut vel inventore ducimus magnam debitis voluptas."
             },
             {
-              "name":"cum-debitis-dolores",
+              "title":"cum-debitis-dolores",
               "tempo":76,
               "dueDate":"2021-08-18T06:36:27.657Z",
               "completed":true,
@@ -286,14 +286,14 @@ const dummyData = {
           'level': 'advanced',
           'assignments': [
             {
-              "name":"modi-et-consequatur",
+              "title":"modi-et-consequatur",
               "tempo":128,
               "dueDate":"2021-08-04T10:45:06.837Z",
               "completed":false,
               "notes":"Repellendus reprehenderit minima voluptas nam dolor quo rerum."
             },
             {
-              "name":"nihil-laboriosam-minus",
+              "title":"nihil-laboriosam-minus",
               "tempo":84,
               "dueDate":"2021-10-28T12:50:04.700Z",
               "completed":false,
@@ -329,14 +329,14 @@ const dummyData = {
           'level': 'lower intermediate',
           'assignments': [
             {
-              "name":"illum-aliquid-voluptatem",
+              "title":"illum-aliquid-voluptatem",
               "tempo":141,
               "dueDate": '2021-03-06T02:57:11.119Z',
               "completed":true,
               "notes":"Rerum ut vel inventore ducimus magnam debitis voluptas."
             },
             {
-              "name":"cum-debitis-dolores",
+              "title":"cum-debitis-dolores",
               "tempo":76,
               "dueDate":"2021-08-18T06:36:27.657Z",
               "completed":true,
@@ -361,14 +361,14 @@ const dummyData = {
           'level': 'beginner',
           'assignments': [
             {
-              "name":"modi-et-consequatur",
+              "title":"modi-et-consequatur",
               "tempo":128,
               "dueDate":"2021-08-04T10:45:06.837Z",
               "completed":false,
               "notes":"Repellendus reprehenderit minima voluptas nam dolor quo rerum."
             },
             {
-              "name":"nihil-laboriosam-minus",
+              "title":"nihil-laboriosam-minus",
               "tempo":84,
               "dueDate":"2021-10-28T12:50:04.700Z",
               "completed":false,
@@ -393,13 +393,13 @@ const dummyData = {
           'level': 'upper intermediate',
           'assignments': [
             {
-              "name":"cum-debitis-dolores",
+              "title":"cum-debitis-dolores",
               "tempo":96,
               "dueDate":"2021-08-18T06:36:27.657Z","completed":true,
               "notes":"Facere ullam quis ut illo harum sint laborum."
             },
             {
-              "name":"modi-et-consequatur",
+              "title":"modi-et-consequatur",
               "tempo":112,
               "dueDate":"2021-08-04T10:45:06.837Z",
               "completed":false,
@@ -423,4 +423,4 @@ const dummyData = {
   ]
 }
 
-module.exports = { dummyData };
+module.exports = dummyData;
