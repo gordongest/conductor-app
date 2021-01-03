@@ -7,24 +7,23 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
-const Assignment = ({ title, notes, completed }) => {
+const AssignmentItem = ({ title, tempo, notes, dueDate, completed, removeAssignment }) => {
   return (
     <>
       <ListItem>
-        <Checkbox tabIndex={-1} checked={completed} />
+        <Checkbox tabIndex={ -1 } checked={ completed } />
         <ListItemText
-          style={{ textDecoration: completed ? 'line-through' : 'none'}}
-        >
+          style={{ textDecoration: completed ? 'line-through' : 'none'}}>
           {title}
         </ListItemText>
-        <ListItemText>
-          {notes}
-        </ListItemText>
+        <ListItemText>{tempo}</ListItemText>
+        <ListItemText>{notes}</ListItemText>
+        <ListItemText>{dueDate}</ListItemText>
         <ListItemSecondaryAction>
           <IconButton aria-label="Edit">
             <EditIcon />
           </IconButton>
-          <IconButton aria-label="Delete">
+          <IconButton aria-label="Delete" onClick={() => removeAssignment(title)}>
             <DeleteIcon />
           </IconButton>
         </ListItemSecondaryAction>
@@ -33,4 +32,4 @@ const Assignment = ({ title, notes, completed }) => {
   )
 }
 
-export default Assignment;
+export default AssignmentItem;

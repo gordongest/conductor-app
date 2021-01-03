@@ -2,46 +2,58 @@ import React, { useState, useEffect } from 'react';
 import { Route, Switch, Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Navbar from './components/Navbar';
 import Landing from './components/Landing';
 import TeacherLanding from './components/teacher/TeacherLanding';
 import Studio from './components/teacher/Studio';
-import StudentDetail from './components/teacher/StudentDetail';
+import StudentView from './components/teacher/StudentView';
 
 // import StudentLanding from './components/students/StudentLanding';
 // import StudentHome from './components/students/StudentHome';
 
 import dummyData from './dummyData';
 
-const App = function(props) {
+const App = props => {
 
-  const [ studioData, setStudioData ] = useState([dummyData.studios]);
-  const [ selectedStudio, setSelectedStudio ] = useState([studioData[0][0]]);
-  const [ student, setStudent ] = useState([selectedStudio[0].students[0]]);
-  const [ tasks, setTasks ] = useState([])
+  const [ studioData, setStudioData ] = useState(dummyData.studios);
+  const [ selectedStudio, setSelectedStudio ] = useState(studioData[0]);
+  const [ student, setStudent ] = useState(selectedStudio.students[0]);
+  const [ assignments, setAssignments ] = useState(student.assignments);
 
   const handleStudioSelect = e => {
-    setSelectedStudio(studioData[0].filter(studio => {
-      return studio.studioName.toLowerCase().replace(/\s+/g, '') === e.target.value.toLowerCase().replace(/\s+/g, '')
-    }))
+    const newStudio = studioData.filter( studio => studio.studioName.toLowerCase().replace(/\s+/g, '') === e.target.value.toLowerCase().replace(/\s+/g, '') )
+    setSelectedStudio( newStudio[0] );
   }
 
   const handleStudentSelect = e => {
-    setStudent(selectedStudio[0].students.filter(student => {
-      return student.name.toLowerCase().replace(/\s+/g, '') === e
-    }))
-    console.log(student[0])
+    const newStudent = selectedStudio.students.filter( student => student.name.toLowerCase().replace(/\s+/g, '') === e )
+    setStudent( newStudent[0] )
+    setAssignments( student.assignments );
+    console.log(student)
+  }
+
+  const addAssignment = ( title, tempo, notes, dueDate ) => {
+    setAssignments([...assignments, { 'title': title, 'completed': false, 'tempo': tempo, 'notes': notes, 'dueDate': dueDate } ])
+    // console.log(assignments)
+  }
+
+  const removeAssignment = assignmentId => {
+    const updatedAssignments = assignments.filter( assignment => assignment.title !== assignmentId );
+    setAssignments( updatedAssignments );
   }
 
   useEffect(() => {
-    console.log('useEffect:', student[0])
-  }, [selectedStudio, student])
+    console.log('studio:', selectedStudio)
+    console.log('student:', student)
+    console.log('assignments:', assignments)
+  }, [ selectedStudio, student, assignments ])
 
   return (
     <>
-      {console.log(student)}
+      {/* {console.log(assignments)} */}
       <Paper
         style={{
           padding: 0,
@@ -56,16 +68,20 @@ const App = function(props) {
             <Typography color='inherit'><Link to={'/'} style={{ color: 'white' }}>Conductor</Link></Typography>
           </Toolbar>
         </AppBar>
-        <Switch>
-          <Route exact path='/' render={() => <Landing />} />
-          <Route exact path='/teacher' render={() => <TeacherLanding studioData={studioData[0]} selectedStudio={selectedStudio[0]} handleSelect={handleStudioSelect} />} />
-          <Route exact path='/teacher/:studio' render={() => <Studio selectedStudio={selectedStudio[0]} handleStudentSelect={handleStudentSelect} />} />
-          <Route exact path='/teacher/:studio/:student' render={() => <StudentDetail student={student[0]} />} />
+        <Grid container justify='center' style={{ marginTop: '1rem' }}>
+          <Grid item xs={11} md={8} lg={8}>
+          <Switch>
+            <Route exact path='/' render={() => <Landing />} />
+            <Route exact path='/teacher' render={() => <TeacherLanding studioData={studioData} selectedStudio={selectedStudio} handleSelect={handleStudioSelect} />} />
+            <Route exact path='/teacher/:studio' render={() => <Studio selectedStudio={selectedStudio} handleStudentSelect={handleStudentSelect} />} />
+            <Route exact path='/teacher/:studio/:student' render={() => <StudentView student={student} assignments={assignments} addAssignment={addAssignment} removeAssignment={removeAssignment} />} />
 
-          {/* <Route exact path='/students' render={() => <StudentLanding />} />
-          <Route exact path='/students/:studio/:name' render={() => <StudentHome />} /> */}
+            {/* <Route exact path='/students' render={() => <StudentLanding />} />
+            <Route exact path='/students/:studio/:name' render={() => <StudentHome />} /> */}
 
-        </Switch>
+          </Switch>
+          </Grid>
+        </Grid>
       </Paper>
     </>
   )
