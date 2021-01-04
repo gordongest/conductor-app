@@ -14,7 +14,7 @@ import AssignmentList from './AssignmentList';
 import AddAssignment from './teacher/AddAssignment';
 
 
-const Assignments = ({ assignments, toggleComplete, addAssignment, updateAssignment, removeAssignment }) => {
+const Assignments = ({ assignments, toggleComplete, addAssignment, updateAssignment, removeAssignment, viewer }) => {
   return (
     <>
       <Paper style={{ margin: '1rem 0', padding: '1rem .5rem' }}>
@@ -24,8 +24,11 @@ const Assignments = ({ assignments, toggleComplete, addAssignment, updateAssignm
           toggleComplete={toggleComplete}
           updateAssignment={ updateAssignment}
           removeAssignment={ removeAssignment }
+          viewer={ viewer }
         />
-        <AddAssignment addAssignment={ addAssignment } />
+        {viewer === 'teacher' &&
+          <AddAssignment addAssignment={ addAssignment } />
+        }
       </Paper>
     </>
   )

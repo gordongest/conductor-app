@@ -9,7 +9,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import useToggle from '../hooks/useToggle';
 import EditAssignment from './teacher/EditAssignment';
 
-const AssignmentItem = ({ title, tempo, notes, dueDate, completed, id, toggleComplete, updateAssignment, removeAssignment }) => {
+const AssignmentItem = ({ title, tempo, notes, dueDate, completed, id, toggleComplete, updateAssignment, removeAssignment, viewer }) => {
   const [ edit, editToggle ] = useToggle()
 
   return (
@@ -35,14 +35,16 @@ const AssignmentItem = ({ title, tempo, notes, dueDate, completed, id, toggleCom
             <ListItemText>{tempo}</ListItemText>
             <ListItemText>{notes}</ListItemText>
             <ListItemText>{dueDate}</ListItemText>
-            <ListItemSecondaryAction>
-              <IconButton aria-label="Edit" onClick={editToggle}>
-                <EditIcon />
-              </IconButton>
-              <IconButton aria-label="Delete" onClick={() => removeAssignment(id)}>
-                <DeleteIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
+            {viewer === 'teacher' &&
+              <ListItemSecondaryAction>
+                <IconButton aria-label="Edit" onClick={editToggle}>
+                  <EditIcon />
+                </IconButton>
+                <IconButton aria-label="Delete" onClick={() => removeAssignment(id)}>
+                  <DeleteIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
+            }
           </>
         )
         }

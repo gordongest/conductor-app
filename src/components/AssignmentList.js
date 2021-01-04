@@ -5,7 +5,7 @@ import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import AssignmentItem from './AssignmentItem';
 
-const AssignmentList = ({ assignments, toggleComplete, updateAssignment, removeAssignment }) => {
+const AssignmentList = ({ assignments, toggleComplete, updateAssignment, removeAssignment, viewer }) => {
   return (
     <List>
       {assignments.map(assignment => {
@@ -21,6 +21,7 @@ const AssignmentList = ({ assignments, toggleComplete, updateAssignment, removeA
               toggleComplete={ toggleComplete }
               updateAssignment={ updateAssignment }
               removeAssignment={ removeAssignment }
+              viewer={ viewer }
             />
             {/* <Divider /> */}
           </>

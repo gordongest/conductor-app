@@ -15,7 +15,7 @@ import TeacherStudioView from './components/teacher/TeacherStudioView';
 import TeacherStudentView from './components/teacher/TeacherStudentView';
 import StudentLanding from './components/students/StudentLanding';
 import StudentStudioView from './components/students/StudentStudioView';
-import StudentHome from './components/students/StudentHome';
+import StudentStudentView from './components/students/StudentStudentView';
 
 const App = props => {
 
@@ -132,15 +132,31 @@ const App = props => {
               />
             } />
 
-            <Route exact path='/students' render={() =>
+            <Route exact path='/student' render={() =>
               <StudentLanding
                 studioData={studioData}
                 selectedStudio={selectedStudio}
                 handleStudioSelect={handleStudioSelect}
               />
             } />
-            <Route exact path='/students/:studio' />
-            <Route exact path='/students/:studio/:name' render={() => <StudentHome />} />
+
+            <Route exact path='/student/:studio' render={() =>
+              <StudentStudioView
+                selectedStudio={selectedStudio}
+                handleStudentSelect={handleStudentSelect}
+              />
+            } />
+
+            <Route exact path='/student/:studio/:name' render={() =>
+              <StudentStudentView
+                student={student}
+                assignments={assignments}
+                toggleComplete={toggleComplete}
+                addAssignment={addAssignment}
+                updateAssignment={updateAssignment}
+                removeAssignment={removeAssignment}
+              />
+            } />
 
           </Switch>
           </Grid>

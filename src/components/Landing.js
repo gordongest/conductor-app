@@ -29,7 +29,7 @@ const Landing = () => {
               </Link>
             </Grid>
             <Grid item>
-              <Link exact to='/students'>
+              <Link exact to='/student'>
                 <Button className={classes.button} size='large' variant='contained' color='primary'>Student</Button>
               </Link>
             </Grid>

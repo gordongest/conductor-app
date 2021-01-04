@@ -6,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import StudentLink from './StudentLink';
 
-const Roster = ({ studioName, roster, handleStudentSelect }) => {
+const Roster = ({ studioName, roster, handleStudentSelect, viewer }) => {
 
   const studioUrl= studioName.toLowerCase().replace(/\s+/g, '')
 
@@ -18,6 +18,7 @@ const Roster = ({ studioName, roster, handleStudentSelect }) => {
             student={ student }
             studioUrl={ studioUrl }
             handleStudentSelect={ handleStudentSelect }
+            viewer={ viewer }
           />
         )}
       </List>

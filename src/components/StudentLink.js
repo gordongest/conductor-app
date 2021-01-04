@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
 
-const StudentLink = ({ student, studioUrl, handleStudentSelect }) => {
+const StudentLink = ({ student, studioUrl, handleStudentSelect, viewer }) => {
 
   const studentUrl = student.name.toLowerCase().replace(/\s+/g, '')
 
   return (
-    <Link to={`/teacher/${studioUrl}/${studentUrl}`} onClick={() => handleStudentSelect(student.id)}>
+    <Link to={`/${viewer}/${studioUrl}/${studentUrl}`} onClick={() => handleStudentSelect(student.id)}>
       <ListItem>{student.name}</ListItem>
     </Link>
   )

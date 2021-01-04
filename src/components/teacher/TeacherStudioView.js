@@ -18,6 +18,7 @@ const TeacherStudioView = ({ selectedStudio, handleStudentSelect }) => {
             studioName={selectedStudio.studioName}
             roster={selectedStudio.students}
             handleStudentSelect={handleStudentSelect}
+            viewer='teacher'
           />
         </Grid>
         <Grid item xs={4}>
