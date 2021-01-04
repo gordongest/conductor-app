@@ -11,9 +11,10 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Landing from './components/Landing';
 import TeacherLanding from './components/teacher/TeacherLanding';
-import Studio from './components/teacher/Studio';
-import TeacherView from './components/teacher/TeacherView';
+import TeacherStudioView from './components/teacher/TeacherStudioView';
+import TeacherStudentView from './components/teacher/TeacherStudentView';
 import StudentLanding from './components/students/StudentLanding';
+import StudentStudioView from './components/students/StudentStudioView';
 import StudentHome from './components/students/StudentHome';
 
 const App = props => {
@@ -114,14 +115,14 @@ const App = props => {
             } />
 
             <Route exact path='/teacher/:studio' render={() =>
-              <Studio
+              <TeacherStudioView
                 selectedStudio={selectedStudio}
                 handleStudentSelect={handleStudentSelect}
               />
             } />
 
             <Route exact path='/teacher/:studio/:student' render={() =>
-              <TeacherView
+              <TeacherStudentView
                 student={student}
                 assignments={assignments}
                 toggleComplete={toggleComplete}

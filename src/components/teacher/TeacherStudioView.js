@@ -1,11 +1,11 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import StudioInfo from './StudioInfo';
+import StudioInfo from '../StudioInfo';
 import Roster from '../Roster';
 import AddStudent from './AddStudent';
 
-const Studio = ({ selectedStudio, handleStudentSelect }) => {
+const TeacherStudioView = ({ selectedStudio, handleStudentSelect }) => {
 
   return (
     <Paper style={{ margin: '1rem 0', padding: '1rem .5rem' }}>
@@ -28,4 +28,4 @@ const Studio = ({ selectedStudio, handleStudentSelect }) => {
   )
 }
 
-export default Studio;
+export default TeacherStudioView;

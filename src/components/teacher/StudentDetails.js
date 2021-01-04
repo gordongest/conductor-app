@@ -3,7 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 
-const Details = ({ student }) => {
+const StudentDetails = ({ student }) => {
   return (
     <Paper style={{ margin: '1rem 0', padding: '1rem .5rem' }}>
       <Typography className="mt-2 ml-3 pb-1" variant='h4' color='inherit'>{student.name}</Typography>
@@ -16,4 +16,4 @@ const Details = ({ student }) => {
   )
 }
 
-export default Details;
+export default StudentDetails;
