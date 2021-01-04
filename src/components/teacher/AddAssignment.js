@@ -6,10 +6,10 @@ import useInputState from '../../hooks/useInputState';
 
 const AddAssignment = ({ addAssignment }) => {
 
-  const [ name, handleNameChange, resetName ] = useInputState('');
-  const [ tempo, handleTempoChange, resetTempo ] = useInputState('');
-  const [ notes, handleNotesChange, resetNotes ] = useInputState('');
-  const [ dueDate, handleDueDateChange, resetDueDate ] = useInputState('');
+  const [ name, setName, resetName ] = useInputState('');
+  const [ tempo, setTempo, resetTempo ] = useInputState('');
+  const [ notes, setNotes, resetNotes ] = useInputState('');
+  const [ dueDate, setDueDate, resetDueDate ] = useInputState('');
 
 
   return (
@@ -26,7 +26,7 @@ const AddAssignment = ({ addAssignment }) => {
       >
         <TextField
           value={name}
-          onChange={handleNameChange}
+          onChange={setName}
           margin='normal'
           label='Add new assignment'
           className="ml-3"
@@ -34,21 +34,21 @@ const AddAssignment = ({ addAssignment }) => {
         />
         <TextField
           value={tempo}
-          onChange={handleTempoChange}
+          onChange={setTempo}
           margin='normal'
           label='Add tempo'
           className="ml-3"
         />
         <TextField
           value={notes}
-          onChange={handleNotesChange}
+          onChange={setNotes}
           margin='normal'
           label='Add notes'
           className="ml-3"
         />
         <TextField
           value={dueDate}
-          onChange={handleDueDateChange}
+          onChange={setDueDate}
           margin='normal'
           label='Add due date'
           className="ml-3"

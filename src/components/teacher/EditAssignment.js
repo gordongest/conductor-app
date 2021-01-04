@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import useInputState from '../../hooks/useInputState';
 
-const EditAssignment = ({ id, title, tempo, notes, dueDate, updateAssignment }) => {
+const EditAssignment = ({ id, title, tempo, notes, dueDate, updateAssignment, editToggle }) => {
 
   const [ newTitle, setTitle, resetTitle ] = useInputState(title);
   const [ newTempo, setTempo, resetTempo ] = useInputState(tempo);
@@ -27,6 +27,7 @@ const EditAssignment = ({ id, title, tempo, notes, dueDate, updateAssignment }) 
         resetTempo();
         resetNotes();
         resetDueDate();
+        editToggle();
       }}
     >
       <TextField

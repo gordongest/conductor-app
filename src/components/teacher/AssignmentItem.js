@@ -23,6 +23,7 @@ const AssignmentItem = ({ title, tempo, notes, dueDate, completed, id, toggleCom
             tempo={ tempo }
             notes={ notes }
             dueDate={ dueDate }
+            editToggle={ editToggle }
           />
          ) : (
           <>
