@@ -13,7 +13,7 @@ import Landing from './components/Landing';
 import TeacherLanding from './components/teacher/TeacherLanding';
 import Studio from './components/teacher/Studio';
 import TeacherView from './components/teacher/TeacherView';
-// import StudentLanding from './components/students/StudentLanding';
+import StudentLanding from './components/students/StudentLanding';
 // import StudentHome from './components/students/StudentHome';
 
 const App = props => {
@@ -105,22 +105,22 @@ const App = props => {
           <Switch>
             <Route exact path='/' render={() => <Landing />} />
 
-            <Route exact path='/teacher' render={() => (
+            <Route exact path='/teacher' render={() =>
               <TeacherLanding
                 studioData={studioData}
                 selectedStudio={selectedStudio}
                 handleStudioSelect={handleStudioSelect}
               />
-            )} />
+            } />
 
-            <Route exact path='/teacher/:studio' render={() => (
+            <Route exact path='/teacher/:studio' render={() =>
               <Studio
                 selectedStudio={selectedStudio}
                 handleStudentSelect={handleStudentSelect}
               />
-            )} />
+            } />
 
-            <Route exact path='/teacher/:studio/:student' render={() => (
+            <Route exact path='/teacher/:studio/:student' render={() =>
               <TeacherView
                 student={student}
                 assignments={assignments}
@@ -129,10 +129,16 @@ const App = props => {
                 updateAssignment={updateAssignment}
                 removeAssignment={removeAssignment}
               />
-            )} />
+            } />
 
-            {/* <Route exact path='/students' render={() => <StudentLanding />} />
-            <Route exact path='/students/:studio/:name' render={() => <StudentHome />} /> */}
+            <Route exact path='/students' render={() =>
+              <StudentLanding
+                studioData={studioData}
+                selectedStudio={selectedStudio}
+                handleStudioSelect={handleStudioSelect}
+              />
+            } />
+            {/* <Route exact path='/students/:studio/:name' render={() => <StudentHome />} /> */}
 
           </Switch>
           </Grid>

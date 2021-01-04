@@ -1,15 +1,42 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/Styles';
+import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
+const useStyles = makeStyles( theme => ({
+  button: {
+    width: 500
+  }
+}));
+
 const AddStudio = () => {
+
+  const classes= useStyles();
 
   const days = [
     'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
   ]
 
   return (
-    <div className="row d-flex justify-content-center">
-        <div className="col-9">
+
+    <Grid container justify='center'>
+      <Button
+        variant='contained'
+        color='primary'
+        size='large'
+        fullWidth
+      >
+        Add a Studio
+      </Button>
+    </Grid>
+
+  )
+}
+
+export default AddStudio;
+
+{/* <div className="row d-flex justify-content-center">
+        <div className="col-11">
 
         <Button variant='contained' color='primary' className="btn btn-block my-3" data-bs-toggle="modal" data-bs-target="#addStudioModal">
             Add a Studio
@@ -63,8 +90,4 @@ const AddStudio = () => {
           </div>
         </div>
       </div>
-    </div>
-  )
-}
-
-export default AddStudio;
+    </div> */}
