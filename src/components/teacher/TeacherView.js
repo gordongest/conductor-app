@@ -8,10 +8,10 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Details from './Details';
-import Goals from './Goals';
-import Assignments from './Assignments';
+import Goals from '../Goals';
+import Assignments from '../Assignments';
 import AddAssignment from './AddAssignment';
-import History from './History';
+import History from '../History';
 
 const TeacherView = ({ student, assignments, toggleComplete, addAssignment, updateAssignment, removeAssignment }) => {
 
@@ -27,7 +27,7 @@ const TeacherView = ({ student, assignments, toggleComplete, addAssignment, upda
         removeAssignment={ removeAssignment }
       />
       {/* TODO: ADD BUTTON TO TOGGLE 'ADD ASSIGNMENT' FORM - ACCORDION? */}
-      
+
     </>
   )
 }

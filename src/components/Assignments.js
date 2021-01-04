@@ -11,7 +11,7 @@ import AccordionActions from '@material-ui/core/AccordionActions';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AssignmentItem from './AssignmentItem';
 import AssignmentList from './AssignmentList';
-import AddAssignment from './AddAssignment';
+import AddAssignment from './teacher/AddAssignment';
 
 
 const Assignments = ({ assignments, toggleComplete, addAssignment, updateAssignment, removeAssignment }) => {

@@ -6,8 +6,8 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import useToggle from '../../hooks/useToggle';
-import EditAssignment from './EditAssignment';
+import useToggle from '../hooks/useToggle';
+import EditAssignment from './teacher/EditAssignment';
 
 const AssignmentItem = ({ title, tempo, notes, dueDate, completed, id, toggleComplete, updateAssignment, removeAssignment }) => {
   const [ edit, editToggle ] = useToggle()
