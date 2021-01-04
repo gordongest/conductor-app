@@ -7,7 +7,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
-const AssignmentItem = ({ title, tempo, notes, dueDate, completed, removeAssignment }) => {
+const AssignmentItem = ({ title, tempo, notes, dueDate, completed, id, removeAssignment }) => {
   return (
     <>
       <ListItem>
@@ -23,7 +23,7 @@ const AssignmentItem = ({ title, tempo, notes, dueDate, completed, removeAssignm
           <IconButton aria-label="Edit">
             <EditIcon />
           </IconButton>
-          <IconButton aria-label="Delete" onClick={() => removeAssignment(title)}>
+          <IconButton aria-label="Delete" onClick={() => removeAssignment(id)}>
             <DeleteIcon />
           </IconButton>
         </ListItemSecondaryAction>

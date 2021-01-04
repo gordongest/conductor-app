@@ -1,23 +1,41 @@
 import React, { useState } from 'react';
-import goButton from './goButton';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import GoButton from './GoButton';
 
-const SelectStudio = ({ studioData, selectedStudio, handleSelect }) => {
+const SelectStudio = ({ studioData, selectedStudio, handleStudioSelect }) => {
 
-  const url = '/teacher/' + selectedStudio.studioName.toLowerCase().replace(/\s+/g, '');
+  const [ studio, setStudio ] = useState('');
+  const handleChange = e => {
+    setStudio( e.target.value )
+    handleStudioSelect( e )
+  }
+  const url = '/teacher/' + studio.toLowerCase().replace(/\s+/g, '');
 
   return (
-    <div className="row d-flex justify-content-center">
-      <form action="" className="form-inline">
-        <label className= "mr-3" htmlFor="#inlineFormStudioSelect">Select Studio</label>
-        <select name="" id="inlineFormStudioSelect" className="custom-select mr-3" onChange={e => handleSelect(e)}>
-          <option selected value="">Select an option...</option>
+
+    <>
+      <FormControl>
+        <InputLabel id="studio-select-label">Select a studio...</InputLabel>
+        <Select
+          labelId="studio-select-label"
+          id="studio-select"
+          value={studio}
+          onChange={handleChange}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
           {studioData.map(studio => {
-            return <option value={studio.studioName}>{studio.studioName}</option>
+            return <MenuItem value={studio.studioName}>{studio.studioName}</MenuItem>
           })}
-        </select>
-        {goButton(url)}
-      </form>
-    </div>
+        </Select>
+        <GoButton route={url} text='go' />
+      </FormControl>
+    </>
   )
 }
 

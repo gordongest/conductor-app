@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 
 const AddStudio = () => {
 
@@ -10,9 +11,9 @@ const AddStudio = () => {
     <div className="row d-flex justify-content-center">
         <div className="col-9">
 
-        <button type="button" className="btn btn-block btn-primary my-3" data-bs-toggle="modal" data-bs-target="#addStudioModal">
+        <Button variant='contained' color='primary' className="btn btn-block my-3" data-bs-toggle="modal" data-bs-target="#addStudioModal">
             Add a Studio
-        </button>
+        </Button>
 
         <div className="modal fade" id="addStudioModal" tabindex="-1" role="dialog" aria-labelledby="addStudioModal" aria-hidden="true">
           <div className="modal-dialog modal-dialog" role="document">

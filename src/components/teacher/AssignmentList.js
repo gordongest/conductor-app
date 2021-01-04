@@ -19,6 +19,7 @@ const AssignmentList = ({ assignments, removeAssignment }) => {
                 notes={ assignment.notes }
                 dueDate={assignment.dueDate}
                 completed={ assignment.completed }
+                id={ assignment.id }
                 removeAssignment={ removeAssignment }
               />
               <Divider />

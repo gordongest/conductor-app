@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, Link } from 'react-router-dom';
+import { v4 as uuid } from 'uuid';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Navbar from './components/Navbar';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 import Landing from './components/Landing';
 import TeacherLanding from './components/teacher/TeacherLanding';
 import Studio from './components/teacher/Studio';
@@ -32,16 +34,14 @@ const App = props => {
     const newStudent = selectedStudio.students.filter( student => student.name.toLowerCase().replace(/\s+/g, '') === e )
     setStudent( newStudent[0] )
     setAssignments( student.assignments );
-    console.log(student)
   }
 
   const addAssignment = ( title, tempo, notes, dueDate ) => {
-    setAssignments([...assignments, { 'title': title, 'completed': false, 'tempo': tempo, 'notes': notes, 'dueDate': dueDate } ])
-    // console.log(assignments)
+    setAssignments([...assignments, { 'title': title, 'completed': false, 'tempo': tempo, 'notes': notes, 'dueDate': dueDate, id: uuid() } ])
   }
 
   const removeAssignment = assignmentId => {
-    const updatedAssignments = assignments.filter( assignment => assignment.title !== assignmentId );
+    const updatedAssignments = assignments.filter( assignment => assignment.id !== assignmentId );
     setAssignments( updatedAssignments );
   }
 
@@ -53,7 +53,6 @@ const App = props => {
 
   return (
     <>
-      {/* {console.log(assignments)} */}
       <Paper
         style={{
           padding: 0,
@@ -65,14 +64,17 @@ const App = props => {
       >
         <AppBar color='primary' position='static' style={{height: '64px'}}>
           <Toolbar>
-            <Typography color='inherit'><Link to={'/'} style={{ color: 'white' }}>Conductor</Link></Typography>
+            <IconButton edge="start" color="inherit" aria-label="menu">
+              <MenuIcon />
+            </IconButton>
+            <Typography variant='h6' color='inherit'><Link to={'/'} style={{ color: 'white' }}>Conductor</Link></Typography>
           </Toolbar>
         </AppBar>
         <Grid container justify='center' style={{ marginTop: '1rem' }}>
           <Grid item xs={11} md={8} lg={8}>
           <Switch>
             <Route exact path='/' render={() => <Landing />} />
-            <Route exact path='/teacher' render={() => <TeacherLanding studioData={studioData} selectedStudio={selectedStudio} handleSelect={handleStudioSelect} />} />
+            <Route exact path='/teacher' render={() => <TeacherLanding studioData={studioData} selectedStudio={selectedStudio} handleStudioSelect={handleStudioSelect} />} />
             <Route exact path='/teacher/:studio' render={() => <Studio selectedStudio={selectedStudio} handleStudentSelect={handleStudentSelect} />} />
             <Route exact path='/teacher/:studio/:student' render={() => <StudentView student={student} assignments={assignments} addAssignment={addAssignment} removeAssignment={removeAssignment} />} />
 

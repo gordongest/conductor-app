@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button'
 
-const goButton = (route) => {
+const GoButton = ({ route, text }) => {
   return (
-    <Link to={`${route}`}>
-      <button type="button" className="btn btn-primary my-3">
-        Go
-      </button>
+    <Link to={ route } >
+    {console.log(route)}
+      <Button variant="contained" color='primary'>
+        {text}
+      </Button>
     </Link>
   )
 }
 
-export default goButton;
+export default GoButton;
