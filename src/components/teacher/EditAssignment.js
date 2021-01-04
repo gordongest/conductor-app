@@ -30,36 +30,38 @@ const EditAssignment = ({ id, title, tempo, notes, dueDate, updateAssignment, ed
         editToggle();
       }}
     >
-      <TextField
-        value={newTitle}
-        onChange={setTitle}
-        margin='normal'
-        label='Edit assignment'
-        className="ml-3"
-        fullWidth
-      />
-      <TextField
-        value={newTempo}
-        onChange={setTempo}
-        margin='normal'
-        label='Edit tempo'
-        className="ml-3"
-      />
-      <TextField
-        value={newNotes}
-        onChange={setNotes}
-        margin='normal'
-        label='Edit notes'
-        className="ml-3"
-      />
-      <TextField
-        value={newDueDate}
-        onChange={setDueDate}
-        margin='normal'
-        label='Edit due date'
-        className="ml-3"
-      />
-      <Button type='submit' variant='contained' color='primary' disableElevation>Submit</Button>
+      <div>
+        <TextField
+          value={newTitle}
+          onChange={setTitle}
+          margin='normal'
+          label='Edit assignment'
+          className="ml-3"
+          fullWidth
+        />
+        <TextField
+          value={newTempo}
+          onChange={setTempo}
+          margin='normal'
+          label='Edit tempo'
+          className="ml-3"
+        />
+        <TextField
+          value={newNotes}
+          onChange={setNotes}
+          margin='normal'
+          label='Edit notes'
+          className="ml-3"
+        />
+        <TextField
+          value={newDueDate}
+          onChange={setDueDate}
+          margin='normal'
+          label='Edit due date'
+          className="ml-3"
+        />
+        <Button type='submit' size='small' color='primary' disableElevation>Save</Button>
+      </div>
     </form>
   )
 }

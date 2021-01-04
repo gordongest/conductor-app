@@ -1,7 +1,13 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionActions from '@material-ui/core/AccordionActions';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import useInputState from '../../hooks/useInputState';
 
 const AddAssignment = ({ addAssignment }) => {
@@ -11,51 +17,61 @@ const AddAssignment = ({ addAssignment }) => {
   const [ notes, setNotes, resetNotes ] = useInputState('');
   const [ dueDate, setDueDate, resetDueDate ] = useInputState('');
 
+  const handleReset = () => {
+    resetName();
+    resetTempo();
+    resetNotes();
+    resetDueDate();
+  };
 
   return (
-    <Paper style={{ margin: '1rem 0', padding: '1rem .5rem' }}>
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          addAssignment( name, tempo, notes, dueDate );
-          resetName();
-          resetTempo();
-          resetNotes();
-          resetDueDate();
-        }}
-      >
-        <TextField
-          value={name}
-          onChange={setName}
-          margin='normal'
-          label='Add new assignment'
-          className="ml-3"
-          fullWidth
-        />
-        <TextField
-          value={tempo}
-          onChange={setTempo}
-          margin='normal'
-          label='Add tempo'
-          className="ml-3"
-        />
-        <TextField
-          value={notes}
-          onChange={setNotes}
-          margin='normal'
-          label='Add notes'
-          className="ml-3"
-        />
-        <TextField
-          value={dueDate}
-          onChange={setDueDate}
-          margin='normal'
-          label='Add due date'
-          className="ml-3"
-        />
-        <Button type='submit' variant='contained' color='primary' disableElevation>Submit</Button>
-      </form>
-    </Paper>
+    <form
+      onSubmit={e => {
+        e.preventDefault();
+        addAssignment( name, tempo, notes, dueDate );
+        handleReset();
+      }}
+    >
+      <Accordion>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography variant='h6'>Add an assignment...</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <TextField
+            value={name}
+            onChange={setName}
+            margin='normal'
+            label='Assignment Title'
+            fullWidth
+          />
+          <TextField
+            value={tempo}
+            onChange={setTempo}
+            margin='normal'
+            label='Tempo'
+            className="ml-3"
+          />
+          <TextField
+            value={notes}
+            onChange={setNotes}
+            margin='normal'
+            label='Notes'
+            className="ml-3"
+          />
+          <TextField
+            value={dueDate}
+            onChange={setDueDate}
+            margin='normal'
+            label='Due Date'
+            className="ml-3"
+          />
+        </AccordionDetails>
+        <AccordionActions>
+          <Button type="button" size="small" onClick={ handleReset }>Cancel</Button>
+          <Button type='submit' size="small" color="primary">Save</Button>
+        </AccordionActions>
+      </Accordion>
+    </form>
   )
 }
 
