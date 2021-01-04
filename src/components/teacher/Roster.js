@@ -1,19 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import StudentLink from './StudentLink';
 import AddStudent from './AddStudent';
 
 const Roster = ({ studioName, roster, handleStudentSelect }) => {
 
-  return (
-    <div className="col d-flex flex-column">
-    {roster.map(student => {
-      const studioUrl= studioName.toLowerCase().replace(/\s+/g, '')
-      const studentUrl = student.name.toLowerCase().replace(/\s+/g, '')
+  const studioUrl= studioName.toLowerCase().replace(/\s+/g, '')
 
-      return <Link to={`/teacher/${studioUrl}/${studentUrl}`} onClick={() => handleStudentSelect(student.id)}><p>{student.name}</p></Link>
-    })}
-    <AddStudent />
-    </div>
+  return (
+    <List>
+      {roster.map(student =>
+        <StudentLink
+          student={ student }
+          studioUrl={ studioUrl }
+          handleStudentSelect={ handleStudentSelect }
+        />
+      )}
+      <AddStudent />
+    </List>
   )
 }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 
 const AddStudent = () => {
 
@@ -6,7 +7,7 @@ const AddStudent = () => {
 
     <div className="row">
 
-      <button type="button" className="btn btn-block btn-primary my-3" data-bs-toggle="modal" data-bs-target="#addStudentModal">Add Student</button>
+      <Button type="button" variant='contained' color='primary' className="btn btn-block" data-bs-toggle="modal" data-bs-target="#addStudentModal">Add Student</Button>
 
       <div className="modal fade" id="addStudentModal" tabindex="-1" role="dialog" aria-labelledby="addStudentModal" aria-hidden="true">
         <div className="modal-dialog modal-dialog" role="document">

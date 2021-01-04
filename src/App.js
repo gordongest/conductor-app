@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Route, Switch, Link } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 import Typography from '@material-ui/core/Typography';
@@ -11,19 +12,16 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Landing from './components/Landing';
 import TeacherLanding from './components/teacher/TeacherLanding';
 import Studio from './components/teacher/Studio';
-import StudentView from './components/teacher/StudentView';
-
+import TeacherView from './components/teacher/TeacherView';
 // import StudentLanding from './components/students/StudentLanding';
 // import StudentHome from './components/students/StudentHome';
 
-import dummyData from './dummyData';
-
 const App = props => {
 
-  const [ studioData, setStudioData ] = useState(dummyData.studios);
-  const [ selectedStudio, setSelectedStudio ] = useState(studioData[0]);
-  const [ student, setStudent ] = useState(selectedStudio.students[0]);
-  const [ assignments, setAssignments ] = useState(student.assignments);
+  const [ studioData, setStudioData ] = useState();
+  const [ selectedStudio, setSelectedStudio ] = useState();
+  const [ student, setStudent ] = useState();
+  const [ assignments, setAssignments ] = useState();
 
   const handleStudioSelect = studioId => {
     const newStudio = studioData.filter(studio => studio.id === studioId)
@@ -73,13 +71,18 @@ const App = props => {
   }
 
   useEffect(() => {
-    console.log('studio:', selectedStudio)
-    console.log('student:', student)
-    console.log('assignments:', assignments)
-  }, [ selectedStudio, student, assignments ])
+    axios.get('http://localhost:3001')
+      .then(response => {
+        setStudioData(response.data[0].studios)
+        setSelectedStudio(response.data[0].studios[0]);
+        setStudent(response.data[0].studios[0].students[0]);
+        setAssignments(response.data[0].studios[0].students[0].assignments);
+      })
+  }, [])
 
   return (
     <>
+      {console.log(selectedStudio)}
       <Paper
         style={{
           padding: 0,
@@ -118,7 +121,7 @@ const App = props => {
             )} />
 
             <Route exact path='/teacher/:studio/:student' render={() => (
-              <StudentView
+              <TeacherView
                 student={student}
                 assignments={assignments}
                 toggleComplete={toggleComplete}

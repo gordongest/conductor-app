@@ -8,7 +8,7 @@ import Goals from './Goals';
 import Assignments from './Assignments';
 import History from './History';
 
-const StudentView = ({ student, assignments, toggleComplete, addAssignment, updateAssignment, removeAssignment }) => {
+const TeacherView = ({ student, assignments, toggleComplete, addAssignment, updateAssignment, removeAssignment }) => {
 
   return (
     <>
@@ -26,4 +26,4 @@ const StudentView = ({ student, assignments, toggleComplete, addAssignment, upda
   )
 }
 
-export default StudentView;
+export default TeacherView;
