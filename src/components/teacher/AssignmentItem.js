@@ -6,27 +6,45 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import useToggle from '../../hooks/useToggle';
+import EditAssignment from './EditAssignment';
 
-const AssignmentItem = ({ title, tempo, notes, dueDate, completed, id, removeAssignment }) => {
+const AssignmentItem = ({ title, tempo, notes, dueDate, completed, id, toggleComplete, updateAssignment, removeAssignment }) => {
+  const [ edit, editToggle ] = useToggle()
+
   return (
     <>
       <ListItem>
-        <Checkbox tabIndex={ -1 } checked={ completed } />
-        <ListItemText
-          style={{ textDecoration: completed ? 'line-through' : 'none'}}>
-          {title}
-        </ListItemText>
-        <ListItemText>{tempo}</ListItemText>
-        <ListItemText>{notes}</ListItemText>
-        <ListItemText>{dueDate}</ListItemText>
-        <ListItemSecondaryAction>
-          <IconButton aria-label="Edit">
-            <EditIcon />
-          </IconButton>
-          <IconButton aria-label="Delete" onClick={() => removeAssignment(id)}>
-            <DeleteIcon />
-          </IconButton>
-        </ListItemSecondaryAction>
+        {edit ? (
+          <EditAssignment
+            id={id}
+            updateAssignment={ updateAssignment }
+            title={ title }
+            tempo={ tempo }
+            notes={ notes }
+            dueDate={ dueDate }
+          />
+         ) : (
+          <>
+            <Checkbox tabIndex={ -1 } checked={ completed } onClick={() => toggleComplete(id)} />
+            <ListItemText
+              style={{ textDecoration: completed ? 'line-through' : 'none'}}>
+              {title}
+            </ListItemText>
+            <ListItemText>{tempo}</ListItemText>
+            <ListItemText>{notes}</ListItemText>
+            <ListItemText>{dueDate}</ListItemText>
+            <ListItemSecondaryAction>
+              <IconButton aria-label="Edit" onClick={editToggle}>
+                <EditIcon />
+              </IconButton>
+              <IconButton aria-label="Delete" onClick={() => removeAssignment(id)}>
+                <DeleteIcon />
+              </IconButton>
+            </ListItemSecondaryAction>
+          </>
+        )
+        }
       </ListItem>
     </>
   )

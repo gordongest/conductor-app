@@ -11,9 +11,9 @@ const SelectStudio = ({ studioData, selectedStudio, handleStudioSelect }) => {
   const [ studio, setStudio ] = useState('');
   const handleChange = e => {
     setStudio( e.target.value )
-    handleStudioSelect( e )
+    handleStudioSelect( e.target.value )
   }
-  const url = '/teacher/' + studio.toLowerCase().replace(/\s+/g, '');
+  const url = '/teacher/' + selectedStudio.studioName.toLowerCase().replace(/\s+/g, '');
 
   return (
 
@@ -30,7 +30,7 @@ const SelectStudio = ({ studioData, selectedStudio, handleStudioSelect }) => {
             <em>None</em>
           </MenuItem>
           {studioData.map(studio => {
-            return <MenuItem value={studio.studioName}>{studio.studioName}</MenuItem>
+            return <MenuItem value={studio.id}>{studio.studioName}</MenuItem>
           })}
         </Select>
         <GoButton route={url} text='go' />

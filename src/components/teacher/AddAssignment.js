@@ -6,22 +6,22 @@ import useInputState from '../../hooks/useInputState';
 
 const AddAssignment = ({ addAssignment }) => {
 
-  const [ name, handleNameChange, reset ] = useInputState('');
-  const [ tempo, handleTempoChange, reset2 ] = useInputState('');
-  const [ notes, handleNotesChange, reset3 ] = useInputState('');
-  const [ dueDate, handleDueDateChange, reset4 ] = useInputState('');
+  const [ name, handleNameChange, resetName ] = useInputState('');
+  const [ tempo, handleTempoChange, resetTempo ] = useInputState('');
+  const [ notes, handleNotesChange, resetNotes ] = useInputState('');
+  const [ dueDate, handleDueDateChange, resetDueDate ] = useInputState('');
 
 
   return (
-    <Paper style={{ margin: '1rem 0', padding: '0 1rem' }}>
+    <Paper style={{ margin: '1rem 0', padding: '1rem .5rem' }}>
       <form
         onSubmit={e => {
           e.preventDefault();
           addAssignment( name, tempo, notes, dueDate );
-          reset();
-          reset2();
-          reset3();
-          reset4();
+          resetName();
+          resetTempo();
+          resetNotes();
+          resetDueDate();
         }}
       >
         <TextField

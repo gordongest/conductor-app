@@ -8,14 +8,20 @@ import Goals from './Goals';
 import Assignments from './Assignments';
 import History from './History';
 
-const StudentView = ({ student, assignments, addAssignment, removeAssignment }) => {
+const StudentView = ({ student, assignments, toggleComplete, addAssignment, updateAssignment, removeAssignment }) => {
 
   return (
     <>
       <Details student={ student } />
       <Goals goals={ student.goals } />
-      <Assignments assignments={assignments} addAssignment={addAssignment} removeAssignment={removeAssignment} />
-      <History assignments={assignments} />
+      <Assignments
+        assignments={ assignments }
+        toggleComplete={ toggleComplete }
+        addAssignment={ addAssignment }
+        updateAssignment={ updateAssignment }
+        removeAssignment={ removeAssignment }
+      />
+      <History assignments={ assignments } />
     </>
   )
 }

@@ -25,24 +25,51 @@ const App = props => {
   const [ student, setStudent ] = useState(selectedStudio.students[0]);
   const [ assignments, setAssignments ] = useState(student.assignments);
 
-  const handleStudioSelect = e => {
-    const newStudio = studioData.filter( studio => studio.studioName.toLowerCase().replace(/\s+/g, '') === e.target.value.toLowerCase().replace(/\s+/g, '') )
-    setSelectedStudio( newStudio[0] );
+  const handleStudioSelect = studioId => {
+    const newStudio = studioData.filter(studio => studio.id === studioId)
+    setSelectedStudio(newStudio[0]);
   }
 
-  const handleStudentSelect = e => {
-    const newStudent = selectedStudio.students.filter( student => student.name.toLowerCase().replace(/\s+/g, '') === e )
-    setStudent( newStudent[0] )
-    setAssignments( student.assignments );
+  const handleStudentSelect = studentId => {
+    const newStudent = selectedStudio.students.filter(student => student.id === studentId)
+    setStudent(newStudent[0])
+    setAssignments(student.assignments);
   }
 
-  const addAssignment = ( title, tempo, notes, dueDate ) => {
-    setAssignments([...assignments, { 'title': title, 'completed': false, 'tempo': tempo, 'notes': notes, 'dueDate': dueDate, id: uuid() } ])
+  const toggleComplete = assignmentId => {
+    const updatedAssignments = assignments.map(assignment => {
+      return assignment.id === assignmentId ? {...assignment, completed: !assignment.completed} : assignment
+    })
+    setAssignments(updatedAssignments);
+  }
+
+  const addAssignment = (title, tempo, notes, dueDate) => {
+    setAssignments([...assignments, {
+      'title': title,
+      'completed': false,
+      'tempo': tempo,
+      'notes': notes,
+      'dueDate': dueDate,
+      id: uuid()
+    }])
   }
 
   const removeAssignment = assignmentId => {
-    const updatedAssignments = assignments.filter( assignment => assignment.id !== assignmentId );
+    const updatedAssignments = assignments.filter(assignment => assignment.id !== assignmentId);
     setAssignments( updatedAssignments );
+  }
+
+  const updateAssignment = (assignmentId, update) => {
+    const updatedAssignments = assignments.map(assignment => {
+      return assignment.id === assignmentId ?
+        {...assignment,
+          title: update.title,
+          tempo: update.tempo,
+          notes: update.notes,
+          dueDate: update.dueDate
+        } : assignment
+    })
+    setAssignments(updatedAssignments);
   }
 
   useEffect(() => {
@@ -70,13 +97,36 @@ const App = props => {
             <Typography variant='h6' color='inherit'><Link to={'/'} style={{ color: 'white' }}>Conductor</Link></Typography>
           </Toolbar>
         </AppBar>
-        <Grid container justify='center' style={{ marginTop: '1rem' }}>
+        <Grid container justify='center'>
           <Grid item xs={11} md={8} lg={8}>
           <Switch>
             <Route exact path='/' render={() => <Landing />} />
-            <Route exact path='/teacher' render={() => <TeacherLanding studioData={studioData} selectedStudio={selectedStudio} handleStudioSelect={handleStudioSelect} />} />
-            <Route exact path='/teacher/:studio' render={() => <Studio selectedStudio={selectedStudio} handleStudentSelect={handleStudentSelect} />} />
-            <Route exact path='/teacher/:studio/:student' render={() => <StudentView student={student} assignments={assignments} addAssignment={addAssignment} removeAssignment={removeAssignment} />} />
+
+            <Route exact path='/teacher' render={() => (
+              <TeacherLanding
+                studioData={studioData}
+                selectedStudio={selectedStudio}
+                handleStudioSelect={handleStudioSelect}
+              />
+            )} />
+
+            <Route exact path='/teacher/:studio' render={() => (
+              <Studio
+                selectedStudio={selectedStudio}
+                handleStudentSelect={handleStudentSelect}
+              />
+            )} />
+
+            <Route exact path='/teacher/:studio/:student' render={() => (
+              <StudentView
+                student={student}
+                assignments={assignments}
+                toggleComplete={toggleComplete}
+                addAssignment={addAssignment}
+                updateAssignment={updateAssignment}
+                removeAssignment={removeAssignment}
+              />
+            )} />
 
             {/* <Route exact path='/students' render={() => <StudentLanding />} />
             <Route exact path='/students/:studio/:name' render={() => <StudentHome />} /> */}

@@ -10,7 +10,7 @@ const Roster = ({ studioName, roster, handleStudentSelect }) => {
       const studioUrl= studioName.toLowerCase().replace(/\s+/g, '')
       const studentUrl = student.name.toLowerCase().replace(/\s+/g, '')
 
-      return <Link to={`/teacher/${studioUrl}/${studentUrl}`} onClick={() => handleStudentSelect(studentUrl)}><p>{student.name}</p></Link>
+      return <Link to={`/teacher/${studioUrl}/${studentUrl}`} onClick={() => handleStudentSelect(student.id)}><p>{student.name}</p></Link>
     })}
     <AddStudent />
     </div>
