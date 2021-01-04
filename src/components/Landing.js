@@ -1,18 +1,41 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Landing.css';
+import { makeStyles } from '@material-ui/core/Styles';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 
-function Landing(props) {
-  
+const useStyles = makeStyles( theme => ({
+  button: {
+    height: 75,
+    width: 150,
+    padding: theme.spacing(2),
+    margin: theme.spacing(9)
+  }
+}));
+
+const Landing = () => {
+
+  const [ spacing, setSpacing ] = useState(2);
+  const classes = useStyles();
+
   return (
-    <div className='row row-cols-2 mt-5 border border-primary'>
-      <div className="col d-flex justify-content-center">
-        <Link exact to='/teacher'>Teacher</Link>
-      </div>
-      <div className="col d-flex justify-content-center">
-        <Link exact to='/students'>Students</Link>
-      </div>
-    </div>
+      <Grid container justify='center' margin={2} alignItems='center'>
+        <Grid item xs={12}>
+          <Grid container direction='row' justify='space-around' spacing={2}>
+            <Grid item>
+              <Link exact to='/teacher'>
+                <Button className={classes.button} size='large' variant='contained' color='primary'>Teacher</Button>
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link exact to='/students'>
+                <Button className={classes.button} size='large' variant='contained' color='primary'>Student</Button>
+              </Link>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
   )
 }
 

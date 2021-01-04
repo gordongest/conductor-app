@@ -82,7 +82,7 @@ const App = props => {
 
   return (
     <>
-      {console.log(selectedStudio)}
+      {/* {console.log(selectedStudio)} */}
       <Paper
         style={{
           padding: 0,
