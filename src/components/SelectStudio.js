@@ -8,7 +8,8 @@ import GoButton from './GoButton';
 
 const SelectStudio = ({ studioData, selectedStudio, handleStudioSelect, viewer }) => {
 
-  const [ studio, setStudio ] = useState('');
+  const [ studio, setStudio ] = useState();
+
   const handleChange = e => {
     setStudio( e.target.value )
     handleStudioSelect( e.target.value )
@@ -28,11 +29,8 @@ const SelectStudio = ({ studioData, selectedStudio, handleStudioSelect, viewer }
             onChange={handleChange}
             fullWidth
           >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
             {studioData.map(studio => {
-              return <MenuItem value={studio.id}>{studio.studioName}</MenuItem>
+              return <MenuItem value={studio.studioId}>{studio.studioName}</MenuItem>
             })}
           </Select>
         </FormControl>

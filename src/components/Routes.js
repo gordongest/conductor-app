@@ -1,12 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import ViewerSelect from './ViewerSelect';
 import Landing from './Landing';
-import TeacherLanding from './teacher/TeacherLanding';
-import TeacherStudioView from './teacher/TeacherStudioView';
-import TeacherStudentView from './teacher/TeacherStudentView';
-import StudentLanding from './students/StudentLanding';
-import StudentStudioView from './students/StudentStudioView';
-import StudentStudentView from './students/StudentStudentView';
+import StudioView from './StudioView';
+import StudentView from './StudentView';
 
 const Routes = (props) => {
 
@@ -21,64 +18,70 @@ const Routes = (props) => {
     addAssignment,
     updateAssignment,
     removeAssignment,
-    toggleComplete
+    toggleComplete,
   } = props;
 
   return (
     <Switch>
 
-      <Route exact path='/' render={() => <Landing />} />
+      <Route exact path='/' render={() => <ViewerSelect />} />
 
-      <Route exact path='/teacher' render={() =>
-        <TeacherLanding
+      <Route exact path='/teacher' component={() =>
+        <Landing
           studioData={studioData}
           selectedStudio={selectedStudio}
           handleStudioSelect={handleStudioSelect}
           addStudio={addStudio}
+          viewer='teacher'
         />
       } />
 
       <Route exact path='/teacher/:studio' render={() =>
-        <TeacherStudioView
+        <StudioView
           selectedStudio={selectedStudio}
           handleStudentSelect={handleStudentSelect}
+          viewer='teacher'
         />
       } />
 
       <Route exact path='/teacher/:studio/:student' render={() =>
-        <TeacherStudentView
+        <StudentView
           student={student}
           assignments={assignments}
           toggleComplete={toggleComplete}
           addAssignment={addAssignment}
           updateAssignment={updateAssignment}
           removeAssignment={removeAssignment}
+          viewer='teacher'
         />
       } />
 
       <Route exact path='/student' render={() =>
-        <StudentLanding
+        <Landing
           studioData={studioData}
           selectedStudio={selectedStudio}
           handleStudioSelect={handleStudioSelect}
+          viewer='student'
         />
       } />
 
       <Route exact path='/student/:studio' render={() =>
-        <StudentStudioView
+        <StudioView
           selectedStudio={selectedStudio}
           handleStudentSelect={handleStudentSelect}
+          viewer='student'
         />
       } />
 
       <Route exact path='/student/:studio/:name' render={() =>
-        <StudentStudentView
+        <StudentView
           student={student}
           assignments={assignments}
           toggleComplete={toggleComplete}
           addAssignment={addAssignment}
           updateAssignment={updateAssignment}
           removeAssignment={removeAssignment}
+          viewer='student'
         />
       } />
 

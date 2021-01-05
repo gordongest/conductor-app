@@ -11,7 +11,10 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect('mongodb://localhost:27017/mvp_db', {
+const MONGODB_URI = 'mongodb+srv://mvp-app:mach4*Carmen@mvp-cluster.qrhdl.mongodb.net/mvp-db?retryWrites=true&w=majority';
+const LOCAL_DB = 'mongodb://localhost/mvp_db';
+
+mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })

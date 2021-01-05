@@ -20,6 +20,7 @@ const App = props => {
 
   const classes = useStyles();
 
+  const [ updateFlag, setUpdateFlag ] = useState(false);
   const [ teacher, setTeacher ] = useState('Gordon Gest')
   const [ studioData, setStudioData ] = useState();
   const [ selectedStudio, setSelectedStudio ] = useState();
@@ -29,27 +30,28 @@ const App = props => {
   useEffect(() => {
     axios.get('http://localhost:3001')
       .then(response => {
-        setStudioData(response.data[0].studios)
+        // console.log(response)
+        setStudioData(response.data[0].studios);
         setSelectedStudio(response.data[0].studios[0]);
         setStudent(response.data[0].studios[0].students[0]);
         setAssignments(response.data[0].studios[0].students[0].assignments);
       })
-  }, [])
+  }, [updateFlag])
 
   const handleStudioSelect = studioId => {
-    const newStudio = studioData.filter(studio => studio.id === studioId)
+    const newStudio = studioData.filter(studio => studio.studioId === studioId)
     setSelectedStudio(newStudio[0]);
   }
 
   const handleStudentSelect = studentId => {
-    const newStudent = selectedStudio.students.filter(student => student.id === studentId)
+    const newStudent = selectedStudio.students.filter(student => student.studentId === studentId)
     setStudent(newStudent[0])
     setAssignments(student.assignments);
   }
 
   const toggleComplete = assignmentId => {
     const updatedAssignments = assignments.map(assignment => {
-      return assignment.id === assignmentId ? {...assignment, completed: !assignment.completed} : assignment
+      return assignment.assignmentId === assignmentId ? {...assignment, completed: !assignment.completed} : assignment
     })
     setAssignments(updatedAssignments);
   }
@@ -73,13 +75,13 @@ const App = props => {
   }
 
   const removeAssignment = assignmentId => {
-    const updatedAssignments = assignments.filter(assignment => assignment.id !== assignmentId);
+    const updatedAssignments = assignments.filter(assignment => assignment.assignmentId !== assignmentId);
     setAssignments( updatedAssignments );
   }
 
   const updateAssignment = (assignmentId, update) => {
     const updatedAssignments = assignments.map(assignment => {
-      return assignment.id === assignmentId ?
+      return assignment.assignmentId === assignmentId ?
         {...assignment,
           title: update.title,
           tempo: update.tempo,
@@ -92,7 +94,10 @@ const App = props => {
 
   return (
     <>
-      {/* {console.log(selectedStudio)} */}
+      {console.log('data:', studioData)}
+      {console.log('studio:', selectedStudio)}
+      {console.log('student:', student)}
+      {console.log('assignments:', assignments)}
       <Paper className={classes.paper} elevation={0}>
 
         <Navbar />

@@ -11,8 +11,8 @@ const Goals = ({ goals }) => {
         {goals.map(goal => {
           return (
             <>
-              <Typography className="ml-3 pb-1" variant='h6' color='inherit'>{goal.title}</Typography>
-              <Typography className="ml-3 pb-1" color='inherit'>{goal.body}</Typography>
+              <Typography className="ml-3 pb-1" variant='h6' color='inherit'>{goal.goalTitle}</Typography>
+              <Typography className="ml-3 pb-1" color='inherit'>{goal.goalBody}</Typography>
             </>
           )
         })}

@@ -8,6 +8,6 @@ const TeacherSchema = new Schema({
   'studios': [ StudioSchema ]
 })
 
-const Teacher = mongoose.model('Teacher', TeacherSchema);
+const Teacher = mongoose.model('teacher', TeacherSchema);
 
 module.exports = Teacher;
