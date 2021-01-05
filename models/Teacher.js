@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const StudioSchema = require('./Studio')
 
-const teacherSchema = new mongoose.Schema({
-  'name': {
-    type: String,
-    required: true
-  },
-  'studios': [studioSchema],
-  
+const TeacherSchema = new Schema({
+  'teacherName': String,
+  'teacherId': String,
+  'studios': [ StudioSchema ]
 })
 
-const Teacher = mongoose.model('Teacher', teacherSchema);
+const Teacher = mongoose.model('Teacher', TeacherSchema);
+
+module.exports = Teacher;

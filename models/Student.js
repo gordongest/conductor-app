@@ -1,30 +1,24 @@
 const mongoose = require('mongoose');
-const Assignment = require('./Assignment')
+const Schema = mongoose.Schema;
+const AssignmentSchema = require('./Assignment')
 
-const studentSchema = new mongoose.Schema({
-  'name': {
-    type: String,
-    required: true
-  },
+const StudentSchema = new Schema({
+  'studentName': String,
+  'studentId': String,
   'age': Number,
-  'level': {
-    type: String,
-    enum: [
-      'beginner',
-      'lower intermediate',
-      'upper intermediate',
-      'advanced'
-    ]
-  },
-  'assignments': [assignmentSchema],
+  'level': String,
+  'assignments': [ AssignmentSchema ],
   'goals': [
-    'title': String,
-    'body': String
+    {
+      'goalTitle': String,
+      'goalBody': String
+    }
   ],
-  'instructor_notes': [
-    'title': String,
-    'body': String
+  'instructorNotes': [
+    {
+      'body': String
+    }
   ]
 });
 
-const Student = mongoose.model('Student', studentSchema);
+module.exports = StudentSchema;

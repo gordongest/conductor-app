@@ -1,28 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Route, Switch, Link } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/Styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Landing from './components/Landing';
-import TeacherLanding from './components/teacher/TeacherLanding';
-import TeacherStudioView from './components/teacher/TeacherStudioView';
-import TeacherStudentView from './components/teacher/TeacherStudentView';
-import StudentLanding from './components/students/StudentLanding';
-import StudentStudioView from './components/students/StudentStudioView';
-import StudentStudentView from './components/students/StudentStudentView';
+import Navbar from './components/Navbar';
+import Routes from './components/Routes';
+
+const useStyles = makeStyles(theme => ({
+  paper: {
+    padding: 0,
+    margin: 0,
+    height: "100vh",
+    backgroundColor: '#fafafa'
+  }
+}))
 
 const App = props => {
 
+  const classes = useStyles();
+
+  const [ teacher, setTeacher ] = useState('Gordon Gest')
   const [ studioData, setStudioData ] = useState();
   const [ selectedStudio, setSelectedStudio ] = useState();
   const [ student, setStudent ] = useState();
   const [ assignments, setAssignments ] = useState();
+
+  useEffect(() => {
+    axios.get('http://localhost:3001')
+      .then(response => {
+        setStudioData(response.data[0].studios)
+        setSelectedStudio(response.data[0].studios[0]);
+        setStudent(response.data[0].studios[0].students[0]);
+        setAssignments(response.data[0].studios[0].students[0].assignments);
+      })
+  }, [])
 
   const handleStudioSelect = studioId => {
     const newStudio = studioData.filter(studio => studio.id === studioId)
@@ -40,6 +52,13 @@ const App = props => {
       return assignment.id === assignmentId ? {...assignment, completed: !assignment.completed} : assignment
     })
     setAssignments(updatedAssignments);
+  }
+
+  const addStudio = (data) => {
+    data.teacherName = teacher;
+
+    axios.post('http://localhost:3001/teacher', data)
+      .then(response => console.log(response))
   }
 
   const addAssignment = (title, tempo, notes, dueDate) => {
@@ -71,96 +90,31 @@ const App = props => {
     setAssignments(updatedAssignments);
   }
 
-  useEffect(() => {
-    axios.get('http://localhost:3001')
-      .then(response => {
-        setStudioData(response.data[0].studios)
-        setSelectedStudio(response.data[0].studios[0]);
-        setStudent(response.data[0].studios[0].students[0]);
-        setAssignments(response.data[0].studios[0].students[0].assignments);
-      })
-  }, [])
-
   return (
     <>
       {/* {console.log(selectedStudio)} */}
-      <Paper
-        style={{
-          padding: 0,
-          margin: 0,
-          height: "100vh",
-          backgroundColor: '#fafafa'
-        }}
-        elevation={0}
-      >
-        <AppBar color='primary' position='static' style={{height: '64px'}}>
-          <Toolbar>
-            <IconButton edge="start" color="inherit" aria-label="menu">
-              <MenuIcon />
-            </IconButton>
-            <Typography variant='h6' color='inherit'><Link to={'/'} style={{ color: 'white' }}>Conductor</Link></Typography>
-          </Toolbar>
-        </AppBar>
+      <Paper className={classes.paper} elevation={0}>
+
+        <Navbar />
+
         <Grid container justify='center'>
           <Grid item xs={11} md={8} lg={8}>
-          <Switch>
-            <Route exact path='/' render={() => <Landing />} />
-
-            <Route exact path='/teacher' render={() =>
-              <TeacherLanding
-                studioData={studioData}
-                selectedStudio={selectedStudio}
-                handleStudioSelect={handleStudioSelect}
-              />
-            } />
-
-            <Route exact path='/teacher/:studio' render={() =>
-              <TeacherStudioView
-                selectedStudio={selectedStudio}
-                handleStudentSelect={handleStudentSelect}
-              />
-            } />
-
-            <Route exact path='/teacher/:studio/:student' render={() =>
-              <TeacherStudentView
-                student={student}
-                assignments={assignments}
-                toggleComplete={toggleComplete}
-                addAssignment={addAssignment}
-                updateAssignment={updateAssignment}
-                removeAssignment={removeAssignment}
-              />
-            } />
-
-            <Route exact path='/student' render={() =>
-              <StudentLanding
-                studioData={studioData}
-                selectedStudio={selectedStudio}
-                handleStudioSelect={handleStudioSelect}
-              />
-            } />
-
-            <Route exact path='/student/:studio' render={() =>
-              <StudentStudioView
-                selectedStudio={selectedStudio}
-                handleStudentSelect={handleStudentSelect}
-              />
-            } />
-
-            <Route exact path='/student/:studio/:name' render={() =>
-              <StudentStudentView
-                student={student}
-                assignments={assignments}
-                toggleComplete={toggleComplete}
-                addAssignment={addAssignment}
-                updateAssignment={updateAssignment}
-                removeAssignment={removeAssignment}
-              />
-            } />
-
-          </Switch>
+            <Routes
+              studioData={studioData}
+              selectedStudio={selectedStudio}
+              student={student}
+              assignments={assignments}
+              handleStudioSelect={handleStudioSelect}
+              handleStudentSelect={handleStudentSelect}
+              addStudio={addStudio}
+              addAssignment={addAssignment}
+              updateAssignment={updateAssignment}
+              removeAssignment={removeAssignment}
+              toggleComplete={toggleComplete}
+            />
           </Grid>
         </Grid>
+
       </Paper>
     </>
   )

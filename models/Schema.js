@@ -1,73 +1,40 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const assignmentSchema = new mongoose.Schema({
-  'name': {
-    type: String,
-    required: true
-  },
+const assignmentSchema = new Schema({
+  'title': String,
+  'assignmentId': String,
   'tempo': Number,
   'dueDate': Date,
-  'completed': {
-    type: Boolean,
-    required: true
-  },
+  'completed': Boolean,
   'notes': String
 });
 
-const Assignment = mongoose.model('Assignment', assignmentSchema);
-
-const studentSchema = new mongoose.Schema({
-  'name': {
-    type: String,
-    required: true
-  },
+const studentSchema = new Schema({
+  'studentName': String,
+  'studentId': String,
   'age': Number,
-  'level': {
-    type: String,
-    enum: [
-      'beginner',
-      'lower intermediate',
-      'upper intermediate',
-      'advanced'
-    ]
-  },
+  'level': String,
   'assignments': [assignmentSchema],
   'goals': [
     {
-      'title': String,
-      'body': String
+      'goalTitle': String,
+      'goalBody': String
     }
   ],
   'instructorNotes': [
     {
-      'body': String
+      'instructorNoteBody': String
     }
   ]
 });
 
-const Student = mongoose.model('Student', studentSchema);
-
-const studioSchema = new mongoose.Schema({
-  'studioName': {
-    type: String,
-    required: true
-  },
+const studioSchema = new Schema({
+  'studioName': String,
+  'studioId': String,
   'location': String,
   'size': Number,
-  'days': [
-    {
-      type: String,
-      enum: [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday'
-      ]
-    }
-  ],
+  'days': [ String ],
   'students': [studentSchema]
 })
 
@@ -76,17 +43,12 @@ studioSchema.pre('validate', function(next) {
   next();
 });
 
-const Studio = mongoose.model('Studio', studioSchema);
-
-const teacherSchema = new mongoose.Schema({
-  'teacherName': {
-    type: String,
-    required: true
-  },
-  'studios': [studioSchema],
-
+const teacherSchema = new Schema({
+  'teacherName': String,
+  'teacherId': String,
+  'studios': [studioSchema]
 })
 
 const Teacher = mongoose.model('Teacher', teacherSchema);
 
-module.exports = { Teacher, Studio, Student, Assignment }
+module.exports = { Teacher }

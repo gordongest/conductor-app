@@ -8,6 +8,7 @@ const GoButton = ({ route, text }) => {
     {console.log(route)}
       <Button
         variant="contained"
+        size='large'
         color='primary'
         fullWidth
       >

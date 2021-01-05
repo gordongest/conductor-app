@@ -1,32 +1,19 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const StudentSchema = require('./Student')
 
-const studioSchema = new mongoose.Schema({
-  'name': {
-    type: String,
-    required: true
-  },
+const StudioSchema = new Schema({
+  'studioName': String,
+  'studioId': String,
   'location': String,
   'size': Number,
-  'days': [
-    {
-      type: String,
-      enum: [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday'
-      ]
-    }
-  ],
-  'students': [studentSchema]
+  'days': [ String ],
+  'students': [ StudentSchema ]
 })
 
-studioSchema.pre('validate', function(next) {
+StudioSchema.pre('validate', function(next) {
   this.size = this.students.length;
   next();
 });
 
-const Studio = mongoose.model('Studio', studioSchema);
+module.exports = StudioSchema;

@@ -1,15 +1,6 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import Button from '@material-ui/core/Button';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import AccordionActions from '@material-ui/core/AccordionActions';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import AssignmentItem from './AssignmentItem';
 import AssignmentList from './AssignmentList';
 import AddAssignment from './teacher/AddAssignment';
 
@@ -26,10 +17,10 @@ const Assignments = ({ assignments, toggleComplete, addAssignment, updateAssignm
           removeAssignment={ removeAssignment }
           viewer={ viewer }
         />
-        {viewer === 'teacher' &&
-          <AddAssignment addAssignment={ addAssignment } />
-        }
       </Paper>
+      {viewer === 'teacher' &&
+        <AddAssignment addAssignment={ addAssignment } />
+      }
     </>
   )
 }

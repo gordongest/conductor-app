@@ -1,7 +1,7 @@
-import React, { Component, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/Styles';
-import Container from '@material-ui/core/Container';
+import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
@@ -16,10 +16,10 @@ const useStyles = makeStyles( theme => ({
 
 const Landing = () => {
 
-  const [ spacing, setSpacing ] = useState(2);
   const classes = useStyles();
 
   return (
+    <Paper style={{ margin: '1rem 0', padding: '1rem .5rem' }}>
       <Grid container justify='center' margin={2} alignItems='center'>
         <Grid item xs={12}>
           <Grid container direction='row' justify='space-around' spacing={2}>
@@ -36,6 +36,7 @@ const Landing = () => {
           </Grid>
         </Grid>
       </Grid>
+    </Paper>
   )
 }
 

@@ -7,7 +7,17 @@ const AddStudent = () => {
 
     <div className="row">
 
-      <Button type="button" variant='contained' color='primary' className="btn btn-block" data-bs-toggle="modal" data-bs-target="#addStudentModal">Add Student</Button>
+      <Button
+        type="button"
+        variant='contained'
+        size='large'
+        color='primary'
+        className="btn btn-block"
+        data-bs-toggle="modal"
+        data-bs-target="#addStudentModal"
+      >
+        Add Student
+      </Button>
 
       <div className="modal fade" id="addStudentModal" tabindex="-1" role="dialog" aria-labelledby="addStudentModal" aria-hidden="true">
         <div className="modal-dialog modal-dialog" role="document">

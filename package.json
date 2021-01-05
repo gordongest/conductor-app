@@ -13,6 +13,7 @@
     "express": "^4.17.1",
     "faker": "^5.1.0",
     "fs": "0.0.1-security",
+    "mocha": "^8.2.1",
     "mongoose": "^5.11.9",
     "path": "^0.12.7",
     "react": "^17.0.1",
@@ -27,6 +28,7 @@
     "server": "cd server/ && nodemon server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "mocha-test": "nodemon --exec 'mocha -R min'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

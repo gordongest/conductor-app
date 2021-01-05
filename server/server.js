@@ -28,6 +28,15 @@ app.get('/', async (req, res) => {
   }
 })
 
+app.post('/teacher/', async (req, res) => {
+  try {
+    await queries.addStudio(req.body.teacherName, req.body)
+  } catch(err) {
+    console.log('ERR:', err);
+    res.json({ msg: err.message })
+  }
+})
+
 app.listen(PORT, () => {
   console.log('Server is listening on port ' + PORT)
 });
