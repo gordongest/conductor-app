@@ -1,6 +1,6 @@
 const assert = require('assert');
 const { v4: uuid } = require('uuid');
-const Teacher = require('../models/Teacher');
+const Teacher = require('../models/TeacherNew');
 
 describe('Updating records in db', () => {
   let Gordon;
@@ -74,19 +74,28 @@ describe('Updating records in db', () => {
       .then(teacher => {
         assert(teacher.studios[1].studioName === 'RMHS');
         done();
-      })
+      });
   });
 
-  it('Can remove an existing subdocument', (done => {
-    Teacher.findOne({ teacherName: 'Gordon' })
+  it('Can remove an existing subdocument', (done) => {
+    const Nodrog = new Teacher({
+      teacherName: "Nodrog",
+      teacherId: uuid(),
+      studios: [ {studioName: 'test'} ]
+    });
+
+    Nodrog.save()
+      .then(Teacher.findOne({ teacherName: 'Nodrog' }))
       .then(teacher => {
-        teacher.studios[0].remove();
+        const studio = teacher.studios[0];
+        teacher.studios.remove(studio);
         return teacher.save();
       })
-      .then(Teacher.findOne({ teacherName: 'Gordon' }))
+      .then(Teacher.findOne({ teacherName: 'Nodrog' }))
       .then(teacher => {
         assert(teacher.studios.length === 0);
         done();
-      })
-  }));
+      });
+  });
+
 });

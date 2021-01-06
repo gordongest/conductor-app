@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const StudentSchema = require('./Student')
+// const StudentSchema = require('./StudentOld')
 
 const StudioSchema = new Schema({
   'studioName': String,

@@ -1,6 +1,6 @@
 const assert = require('assert');
 const { v4: uuid } = require('uuid');
-const Teacher = require('../models/Teacher');
+const Teacher = require('../models/TeacherNew');
 
 describe('Reading records in the db', () => {
   let Gordon;

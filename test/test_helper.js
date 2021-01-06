@@ -14,6 +14,12 @@ before((done) => {
 });
 
 beforeEach((done) => {
-  mongoose.connection.collections.teachers.drop();
-  done();
+  const { teachers, studios, students } = mongoose.connection.collections;
+  teachers.drop(() => {
+    studios.drop(() => {
+      students.drop(() => {
+        done();
+      })
+    })
+  });
 });
