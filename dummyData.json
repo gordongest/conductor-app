@@ -5,7 +5,6 @@
       "studioName": "HEHS",
       "studioId":"6b9cbcba-94f0-4e84-9373-c8ef033cb574",
       "location": "Hoffman Estates, IL",
-      "size": 3,
       "days": "Thursday",
       "students": [
         {
@@ -119,7 +118,6 @@
       "studioName": "Music Institute of Chicago",
       "studioId":"2cb6772b-9ff6-4edb-9cd2-b31a7ffdc53b",
       "location": "Evanston, IL",
-      "size": 4,
       "days": "Friday",
       "students": [
         {
@@ -268,7 +266,6 @@
       "studioName": "North Central College",
       "studioId":"ba37afab-3aba-4c9d-812e-9efcde4437e9",
       "location": "Naperville, IL",
-      "size": 2,
       "days": "Tuesday",
       "students": [
         {
@@ -347,7 +344,6 @@
       "studioName": "DePaul CMD",
       "studioId":"be316010-f4b5-48be-ab18-8f558d3541f3",
       "location": "Chicago, IL",
-      "size": 3,
       "days": [
         "Sunday"
       ],

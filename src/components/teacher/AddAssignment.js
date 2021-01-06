@@ -1,4 +1,5 @@
 import React from 'react';
+import { v4 as uuid } from 'uuid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -11,24 +12,37 @@ import useInputState from '../../hooks/useInputState';
 
 const AddAssignment = ({ addAssignment }) => {
 
-  const [ name, setName, resetName ] = useInputState('');
+  const [ title, setTitle, resetTitle ] = useInputState('');
   const [ tempo, setTempo, resetTempo ] = useInputState('');
   const [ notes, setNotes, resetNotes ] = useInputState('');
   const [ dueDate, setDueDate, resetDueDate ] = useInputState('');
 
   const handleReset = () => {
-    resetName();
+    resetTitle();
     resetTempo();
     resetNotes();
     resetDueDate();
   };
 
+  const handleSubmit = (title, tempo, notes, dueDate) => {
+    const newAssignment = {
+      title: title,
+      assignmentId: uuid(),
+      tempo: tempo,
+      notes: notes,
+      dueDate: dueDate,
+      completed: false
+    };
+
+    addAssignment(newAssignment);
+    handleReset();
+  }
+
   return (
     <form
       onSubmit={e => {
         e.preventDefault();
-        addAssignment( name, tempo, notes, dueDate );
-        handleReset();
+        handleSubmit(title, tempo, notes, dueDate);
       }}
     >
       <Accordion>
@@ -37,8 +51,8 @@ const AddAssignment = ({ addAssignment }) => {
         </AccordionSummary>
         <AccordionDetails>
           <TextField
-            value={name}
-            onChange={setName}
+            value={title}
+            onChange={setTitle}
             margin='normal'
             label='Assignment Title'
             fullWidth
@@ -66,7 +80,7 @@ const AddAssignment = ({ addAssignment }) => {
           />
         </AccordionDetails>
         <AccordionActions>
-          <Button type="button" size="small" onClick={ handleReset }>Cancel</Button>
+          <Button type="button" size="small" onClick={handleReset}>Cancel</Button>
           <Button type='submit' size="small" color="primary">Save</Button>
         </AccordionActions>
       </Accordion>

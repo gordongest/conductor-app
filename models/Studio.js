@@ -6,14 +6,12 @@ const StudioSchema = new Schema({
   'studioName': String,
   'studioId': String,
   'location': String,
-  'size': Number,
-  'days': [ String ],
-  'students': [ StudentSchema ]
+  'days': [],
+  'students': []
 })
 
-StudioSchema.pre('validate', function(next) {
-  this.size = this.students.length;
-  next();
+StudioSchema.virtual('size').get(function() {
+  return this.students.length;
 });
 
 module.exports = StudioSchema;

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { v4 as uuid } from 'uuid';
 import { makeStyles } from '@material-ui/core/Styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -21,22 +20,28 @@ const App = props => {
   const classes = useStyles();
 
   const [ updateFlag, setUpdateFlag ] = useState(false);
-  const [ teacher, setTeacher ] = useState('Gordon Gest')
+  const [ teacher, setTeacher ] = useState()
   const [ studioData, setStudioData ] = useState();
   const [ selectedStudio, setSelectedStudio ] = useState();
   const [ student, setStudent ] = useState();
   const [ assignments, setAssignments ] = useState();
 
   useEffect(() => {
-    axios.get('http://localhost:3001')
+    axios.get('http://18.223.118.85/')
       .then(response => {
-        // console.log(response)
+        // console.log(response.data)
+        setTeacher(response.data[0])
         setStudioData(response.data[0].studios);
         setSelectedStudio(response.data[0].studios[0]);
         setStudent(response.data[0].studios[0].students[0]);
         setAssignments(response.data[0].studios[0].students[0].assignments);
       })
   }, [updateFlag])
+
+  const handleUpdate = () => {
+    setUpdateFlag(!updateFlag);
+    console.log(updateFlag)
+  }
 
   const handleStudioSelect = studioId => {
     const newStudio = studioData.filter(studio => studio.studioId === studioId)
@@ -57,21 +62,24 @@ const App = props => {
   }
 
   const addStudio = (data) => {
-    data.teacherName = teacher;
+    data.teacherId = teacher.teacherId;
 
-    axios.post('http://localhost:3001/teacher', data)
-      .then(response => console.log(response))
+    axios.post('http://localhost:4001/teacher', data)
+      .then(response => {
+        handleUpdate();
+        console.log(response.data);
+      })
   }
 
-  const addAssignment = (title, tempo, notes, dueDate) => {
-    setAssignments([...assignments, {
-      'title': title,
-      'completed': false,
-      'tempo': tempo,
-      'notes': notes,
-      'dueDate': dueDate,
-      id: uuid()
-    }])
+  const addAssignment = async (data) => {
+    setAssignments([...assignments, data]);
+
+    data.teacherId = teacher.teacherId;
+    data.studioId = selectedStudio.studioId;
+    data.studentId = student.studentId;
+
+    axios.post('http://localhost:4001/teacher/studio/student', data)
+      // .then(response => console.log(response))
   }
 
   const removeAssignment = assignmentId => {
@@ -94,6 +102,8 @@ const App = props => {
 
   return (
     <>
+      {console.log('flag:', updateFlag)}
+      {console.log('teacher:', teacher)}
       {console.log('data:', studioData)}
       {console.log('studio:', selectedStudio)}
       {console.log('student:', student)}

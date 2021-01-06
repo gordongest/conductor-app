@@ -7,7 +7,7 @@ const StudentSchema = new Schema({
   'studentId': String,
   'age': Number,
   'level': String,
-  'assignments': [ AssignmentSchema ],
+  'assignments': [],
   'goals': [
     {
       'goalTitle': String,

@@ -23,7 +23,7 @@ mongoose.connect(LOCAL_DB, {
 app.get('/', async (req, res) => {
   try {
     await queries.getTeachers()
-      .then( response => res.status(200).send(response) )
+      .then(response => res.status(200).send(response));
   } catch(err) {
     console.log('ERROR:', err);
     res.json({ msg: err.message })
@@ -32,12 +32,23 @@ app.get('/', async (req, res) => {
 
 app.post('/teacher/', async (req, res) => {
   try {
-    await queries.addStudio(req.body.teacherName, req.body)
+    await queries.addStudio(req.body.teacherId, req.body)
+      .then(response => res.status(201).send(response));
   } catch(err) {
     console.log('ERR:', err);
-    res.json({ msg: err.message })
+    res.json({ msg: err.message });
   }
-})
+});
+
+app.post('/teacher/:studio/:student', async (req, res) => {
+  try {
+    await queries.addAssignment(req.body)
+      .then(response => res.status(201).send(response));
+  } catch(err) {
+    console.log('ERR:', err);
+    res.json({ msg: err.message });
+  }
+});
 
 app.listen(PORT, () => {
   console.log('Server is listening on port ' + PORT)

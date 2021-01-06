@@ -9,7 +9,7 @@ describe('Updating records in db', () => {
     Gordon = new Teacher({
       teacherName: "Gordon",
       teacherId: uuid(),
-      studios: []
+      studios: [{ studioName: 'test' }]
     });
 
     Gordon.save()
@@ -63,4 +63,30 @@ describe('Updating records in db', () => {
       done
     );
   });
+
+  it('Can add a subdocument to the document', (done) => {
+    Teacher.findOne({ teacherName: 'Gordon' })
+      .then(teacher => {
+        teacher.studios.push({ studioName: 'RMHS' });
+        return teacher.save();
+      })
+      .then(Teacher.findOne({ teacherName: 'Gordon' }))
+      .then(teacher => {
+        assert(teacher.studios[1].studioName === 'RMHS');
+        done();
+      })
+  });
+
+  it('Can remove an existing subdocument', (done => {
+    Teacher.findOne({ teacherName: 'Gordon' })
+      .then(teacher => {
+        teacher.studios[0].remove();
+        return teacher.save();
+      })
+      .then(Teacher.findOne({ teacherName: 'Gordon' }))
+      .then(teacher => {
+        assert(teacher.studios.length === 0);
+        done();
+      })
+  }));
 });
