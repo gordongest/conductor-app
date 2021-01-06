@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const AssignmentSchema = require('./AssignmentNew')
+const AssignmentSchema = require('./Assignment')
 
 const StudentSchema = new Schema({
   studentName: String,

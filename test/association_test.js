@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const assert = require('assert');
-const Teacher = require('../models/TeacherNew');
-const Studio = require('../models/StudioNew');
-const Student = require('../models/StudentNew');
+const Teacher = require('../models/Teacher');
+const Studio = require('../models/Studio');
+const Student = require('../models/Student');
 
 describe('Associations', ()=> {
 
