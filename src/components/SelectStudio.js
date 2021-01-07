@@ -30,7 +30,7 @@ const SelectStudio = ({ studioData, selectedStudio, handleStudioSelect, viewer }
             fullWidth
           >
             {studioData.map(studio => {
-              return <MenuItem value={studio.studioId}>{studio.studioName}</MenuItem>
+              return <MenuItem value={studio._id}>{studio.studioName}</MenuItem>
             })}
           </Select>
         </FormControl>

@@ -1,10 +1,16 @@
-const Teacher = require('../models/Teacher');
+const Teacher = require('./models/Teacher');
+const Studio = require('./models/Studio');
+const Student = require('./models/Student');
 const { v4: uuid } = require('uuid');
 const mongoose = require('mongoose');
 const db = mongoose.connection;
 
-const getTeachers = () => {
-  return Teacher.find({ teacherName: "Gordon Gest" })
+const getStudios = () => {
+  return Studio.find({})
+}
+
+const getStudents = (_id) => {
+  return Student.find({ studio: _id })
 }
 
 const makeNewStudio = (data) => {
@@ -36,8 +42,7 @@ const addStudio = (teacherId, data) => {
 
 const makeNewStudent = (data) => {
   const newStudent = {
-    "name": data.name,
-    "studentId": uuid(),
+    "studentName": data.name,
     "age": data.age,
     "level": data.level,
     "assignments": [],
@@ -49,7 +54,7 @@ const makeNewStudent = (data) => {
     ],
     "instructorNotes": [
       {
-        "instructorNotesBody": ""
+        "body": ""
       }
     ]
   }
@@ -73,7 +78,6 @@ const addStudent = (studioId, data) => {
 const makeNewAssignment = (data) => {
   const newAssignment = {
     'title': data.title,
-    'assignmentId': data.assignmentId,
     'tempo': Number(data.tempo),
     'dueDate': data.dueDate,
     'completed': false,
@@ -83,42 +87,32 @@ const makeNewAssignment = (data) => {
   return newAssignment;
 }
 
-const addAssignment = (data) => {
-
-  // NEED:
-    // teacherName/teacherId
-    // studioId
-    // studentId
-
-  // call Teacher.findOne
-    // iterate through teacher.studios until studioId matches
-      // iterate through studio.students until studentId matches
-        // push data (should be array of assignments) to student.assignments
-        // save and return
-
-  const query = { teacherId: data.teacherId };
+const addAssignment = async (data) => {
+  const _id = data.studentId;
   const assignment = makeNewAssignment(data);
 
-  Teacher.findOne(query)
-    .then(teacher => {
-      for (let i = 0; i < teacher.studios.length; i++) {
-        let currentStudio = teacher.studios[i];
-        if (currentStudio.studioId === data.studioId) {
-          for (let j = 0; j < currentStudio.students.length; j++) {
-            let currentStudent = currentStudio.students[j];
-            if (currentStudent.studentId === data.studentId) {
-              currentStudent.assignments.push(assignment);
-              teacher.save();
-            }
-          }
-        }
-      }
-    })
-    .catch(err => console.log('ERR:', err));
+  const student = await Student.findOne( {_id} )
 
-    return Teacher.findOne(query);
+  student.assignments.push(assignment);
+  return student.save();
 };
 
+const removeAssignment = async (data) => {
+  const { student_id, assignment_id } = data;
+  const student = await Student.findOne({ _id: student_id })
+
+  student.assignments.remove({ _id: assignment_id })
+  return student.save();
+}
+
+const updateAssignments = async (data) => {
+  const { student_id, assignments } = data;
+  const student = await Student.findOne({ _id: student_id })
+
+  student.assignments = assignments;
+  return student.save();
+}
+
 module.exports = {
-  getTeachers, addStudio, addStudent, addAssignment
+  getStudios, getStudents, addStudio, addStudent, addAssignment, removeAssignment, updateAssignments
 };

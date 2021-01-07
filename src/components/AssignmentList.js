@@ -9,12 +9,7 @@ const AssignmentList = ({ assignments, toggleComplete, updateAssignment, removeA
         return (
           <>
             <AssignmentItem
-              title={ assignment.title }
-              tempo={assignment.tempo}
-              notes={ assignment.notes }
-              dueDate={ assignment.dueDate }
-              completed={ assignment.completed }
-              id={ assignment.assignmentId }
+              assignment={ assignment }
               toggleComplete={ toggleComplete }
               updateAssignment={ updateAssignment }
               removeAssignment={ removeAssignment }

@@ -1,19 +1,12 @@
 FROM node:13.12.0-alpine
 
-RUN mkdir -p /src/app
+WORKDIR /conductor-app
 
-WORKDIR /src/app
+COPY . .
 
-COPY package.json ./
-COPY package-lock.json ./
-
-RUN npm install
-RUN npm install --save @material-ui/core
-RUN npm install --save @material-ui/icons
-RUN npm install react-scripts@3.4.1 -g
-
-COPY . ./
+RUN npm install @material-ui/core
+RUN npm install --production
 
 EXPOSE 3000
 
-CMD ["npm", "run", "deploy"]
+CMD ["npm", "run", "build"]

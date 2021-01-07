@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const assert = require('assert');
-const Teacher = require('../models/Teacher');
-const Studio = require('../models/Studio');
-const Student = require('../models/Student');
+const Teacher = require('../database/models/Teacher');
+const Studio = require('../database/models/Studio');
+const Student = require('../database/models/Student');
 
 describe('Associations', ()=> {
 
@@ -12,6 +12,7 @@ describe('Associations', ()=> {
     gordon = new Teacher({ teacherName: 'Gordon' });
     hehs = new Studio({ studioName: 'HEHS', location: 'Hoffman Estates, IL', days: [ 'Wednesday' ] });
     jackie = new Student({ studentName: 'Jackie' });
+
 
     gordon.newStudios.push(hehs);
     hehs.students.push(jackie);
@@ -55,12 +56,10 @@ describe('Associations', ()=> {
           notes: 'blow across technical passages',
           completed: false
         }
-        console.log(teacher.newStudios[0].students[0]);
         teacher.newStudios[0].students[0].assignments.push(assignment);
         return teacher.save();
       })
       .then(teacher => {
-        console.log(teacher.newStudios[0].students[0]);
         assert(teacher.newStudios[0].students[0].assignments.length === 2);
         assert(teacher.teacherName === 'Gordon');
         assert(teacher.newStudios[0].studioName === 'HEHS');

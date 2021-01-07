@@ -1,5 +1,5 @@
 const assert = require('assert');
-const Teacher = require('../models/Teacher');
+const Teacher = require('../database/models/Teacher');
 const { v4: uuid } = require('uuid');
 
 describe('Virtual types', () => {

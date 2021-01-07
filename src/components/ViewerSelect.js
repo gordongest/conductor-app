@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
   button: {
     height: 75,
     width: 150,

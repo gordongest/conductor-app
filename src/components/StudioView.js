@@ -1,14 +1,24 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core';
 import StudioInfo from './StudioInfo';
 import Roster from './Roster';
 import AddStudent from './teacher/AddStudent';
 
-const StudioView = ({ selectedStudio, handleStudentSelect, viewer }) => {
+const useStyles = makeStyles(theme => ({
+  paper: {
+    margin: '1rem 0',
+    padding: '1rem .5rem'
+  }
+}));
+
+const StudioView = ({ selectedStudio, students, handleStudentSelect, viewer }) => {
+
+  const classes = useStyles();
 
   return (
-    <Paper style={{ margin: '1rem 0', padding: '1rem .5rem' }}>
+    <Paper className={classes.paper}>
 
       <Grid container spacing={3} justify='center' alignItems='center'>
 
@@ -19,7 +29,7 @@ const StudioView = ({ selectedStudio, handleStudentSelect, viewer }) => {
         <Grid item xs={6}>
           <Roster
             studioName={selectedStudio.studioName}
-            roster={selectedStudio.students}
+            students={students}
             handleStudentSelect={handleStudentSelect}
             viewer={viewer}
           />

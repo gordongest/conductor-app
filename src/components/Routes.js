@@ -5,12 +5,13 @@ import Landing from './Landing';
 import StudioView from './StudioView';
 import StudentView from './StudentView';
 
-const Routes = (props) => {
+const Routes = props => {
 
   const {
     studioData,
     selectedStudio,
-    student,
+    students,
+    selectedStudent,
     assignments,
     handleStudioSelect,
     handleStudentSelect,
@@ -34,19 +35,20 @@ const Routes = (props) => {
           addStudio={addStudio}
           viewer='teacher'
         />
-      } />
+      }/>
 
       <Route exact path='/teacher/:studio' render={() =>
         <StudioView
           selectedStudio={selectedStudio}
+          students={students}
           handleStudentSelect={handleStudentSelect}
           viewer='teacher'
         />
-      } />
+      }/>
 
       <Route exact path='/teacher/:studio/:student' render={() =>
         <StudentView
-          student={student}
+          student={selectedStudent}
           assignments={assignments}
           toggleComplete={toggleComplete}
           addAssignment={addAssignment}
@@ -54,7 +56,7 @@ const Routes = (props) => {
           removeAssignment={removeAssignment}
           viewer='teacher'
         />
-      } />
+      }/>
 
       <Route exact path='/student' render={() =>
         <Landing
@@ -63,19 +65,20 @@ const Routes = (props) => {
           handleStudioSelect={handleStudioSelect}
           viewer='student'
         />
-      } />
+      }/>
 
       <Route exact path='/student/:studio' render={() =>
         <StudioView
           selectedStudio={selectedStudio}
+          students={students}
           handleStudentSelect={handleStudentSelect}
           viewer='student'
         />
-      } />
+      }/>
 
       <Route exact path='/student/:studio/:name' render={() =>
         <StudentView
-          student={student}
+          student={selectedStudent}
           assignments={assignments}
           toggleComplete={toggleComplete}
           addAssignment={addAssignment}
@@ -83,7 +86,7 @@ const Routes = (props) => {
           removeAssignment={removeAssignment}
           viewer='student'
         />
-      } />
+      }/>
 
     </Switch>
   )

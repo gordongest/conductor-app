@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
     height: "100vh",
     backgroundColor: '#fafafa'
   }
-}))
+}));
 
 const App = props => {
 
@@ -23,91 +23,110 @@ const App = props => {
   const [ teacher, setTeacher ] = useState()
   const [ studioData, setStudioData ] = useState();
   const [ selectedStudio, setSelectedStudio ] = useState();
-  const [ student, setStudent ] = useState();
+  const [ students, setStudents ] = useState();
+  const [ selectedStudent, setSelectedStudent ] = useState();
   const [ assignments, setAssignments ] = useState();
 
   useEffect(() => {
-    axios.get('http://18.223.118.85/')
+    axios.get('http://localhost:3001/')
       .then(response => {
-        // console.log(response.data)
-        setTeacher(response.data[0])
-        setStudioData(response.data[0].studios);
-        setSelectedStudio(response.data[0].studios[0]);
-        setStudent(response.data[0].studios[0].students[0]);
-        setAssignments(response.data[0].studios[0].students[0].assignments);
+        // setTeacher(response.data[0]);
+        setStudioData(response.data);
+        setSelectedStudio(response.data[0]);
+        // setStudent(response.data[0].studios[0].students[0]);
+        // setAssignments(response.data[0].studios[0].students[0].assignments);
       })
   }, [updateFlag])
 
   const handleUpdate = () => {
     setUpdateFlag(!updateFlag);
-    console.log(updateFlag)
   }
 
   const handleStudioSelect = studioId => {
-    const newStudio = studioData.filter(studio => studio.studioId === studioId)
+    const newStudio = studioData.filter(studio => studio._id === studioId);
+
     setSelectedStudio(newStudio[0]);
+
+    axios.get(`http://localhost:3001/${studioId}`)
+      .then(response => setStudents(response.data));
   }
 
-  const handleStudentSelect = studentId => {
-    const newStudent = selectedStudio.students.filter(student => student.studentId === studentId)
-    setStudent(newStudent[0])
-    setAssignments(student.assignments);
+  const handleStudentSelect = async (studentId) => {
+    const newStudent = students.filter(student => student._id === studentId)
+    setSelectedStudent(newStudent[0]);
+    setAssignments(newStudent[0].assignments);
   }
 
   const toggleComplete = assignmentId => {
     const updatedAssignments = assignments.map(assignment => {
-      return assignment.assignmentId === assignmentId ? {...assignment, completed: !assignment.completed} : assignment
-    })
+      return assignment._id === assignmentId ? {...assignment, completed: !assignment.completed} : assignment
+    });
+
     setAssignments(updatedAssignments);
+
+    const data = {
+      student_id: selectedStudent._id,
+      assignments: updatedAssignments
+    };
+
+    axios.put('http://localhost:3001/updateAssignments', data)
+      .then(response => handleUpdate());
   }
 
   const addStudio = (data) => {
     data.teacherId = teacher.teacherId;
 
-    axios.post('http://localhost:4001/teacher', data)
-      .then(response => {
-        handleUpdate();
-        console.log(response.data);
-      })
+    axios.post('http://localhost:3001/teacher', data)
+      .then(response => handleUpdate());
   }
 
-  const addAssignment = async (data) => {
-    setAssignments([...assignments, data]);
+  const addAssignment = async (assignment) => {
+    setAssignments([...assignments, assignment]);
 
-    data.teacherId = teacher.teacherId;
-    data.studioId = selectedStudio.studioId;
-    data.studentId = student.studentId;
+    assignment.studentId = selectedStudent._id;
 
-    axios.post('http://localhost:4001/teacher/studio/student', data)
-      // .then(response => console.log(response))
+    axios.post('http://localhost:3001/addAssignment', assignment)
+      .then(response => console.log(response.data));
   }
 
   const removeAssignment = assignmentId => {
-    const updatedAssignments = assignments.filter(assignment => assignment.assignmentId !== assignmentId);
+    const updatedAssignments = assignments.filter(assignment => assignment._id !== assignmentId);
+
     setAssignments( updatedAssignments );
+
+    const data = {
+      student_id: selectedStudent._id,
+      assignment_id: assignmentId
+    };
+
+    axios.put('http://localhost:3001/removeAssignment', data)
+      .then(response => handleUpdate());
   }
 
   const updateAssignment = (assignmentId, update) => {
     const updatedAssignments = assignments.map(assignment => {
-      return assignment.assignmentId === assignmentId ?
+      return assignment._id === assignmentId ?
         {...assignment,
           title: update.title,
           tempo: update.tempo,
           notes: update.notes,
           dueDate: update.dueDate
         } : assignment
-    })
+    });
+
     setAssignments(updatedAssignments);
+
+    const data = {
+      student_id: selectedStudent._id,
+      assignments: updatedAssignments
+    };
+
+    axios.put('http://localhost:3001/updateAssignments', data)
+      .then(response => handleUpdate());
   }
 
   return (
     <>
-      {console.log('flag:', updateFlag)}
-      {console.log('teacher:', teacher)}
-      {console.log('data:', studioData)}
-      {console.log('studio:', selectedStudio)}
-      {console.log('student:', student)}
-      {console.log('assignments:', assignments)}
       <Paper className={classes.paper} elevation={0}>
 
         <Navbar />
@@ -117,7 +136,8 @@ const App = props => {
             <Routes
               studioData={studioData}
               selectedStudio={selectedStudio}
-              student={student}
+              students={students}
+              selectedStudent={selectedStudent}
               assignments={assignments}
               handleStudioSelect={handleStudioSelect}
               handleStudentSelect={handleStudentSelect}

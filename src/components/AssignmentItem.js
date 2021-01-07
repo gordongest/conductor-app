@@ -9,15 +9,17 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import useToggle from '../hooks/useToggle';
 import EditAssignment from './teacher/EditAssignment';
 
-const AssignmentItem = ({ title, tempo, notes, dueDate, completed, id, toggleComplete, updateAssignment, removeAssignment, viewer }) => {
+const AssignmentItem = ({ assignment, toggleComplete, updateAssignment, removeAssignment, viewer }) => {
+
   const [ edit, editToggle ] = useToggle()
+  const { title, tempo, notes, dueDate, completed, _id } = assignment;
 
   return (
     <>
       <ListItem>
         {edit ? (
           <EditAssignment
-            id={id}
+            id={ _id }
             updateAssignment={ updateAssignment }
             title={ title }
             tempo={ tempo }
@@ -27,20 +29,20 @@ const AssignmentItem = ({ title, tempo, notes, dueDate, completed, id, toggleCom
           />
          ) : (
           <>
-            <Checkbox tabIndex={ -1 } checked={ completed } onClick={() => toggleComplete(id)} />
+            <Checkbox tabIndex={ -1 } checked={ completed } onClick={() => toggleComplete(_id)} />
             <ListItemText
-              style={{ textDecoration: completed ? 'line-through' : 'none'}}>
-              {title}
+              style={{ textDecoration:  completed ? 'line-through' : 'none'}}>
+              { title }
             </ListItemText>
-            <ListItemText>{tempo}</ListItemText>
-            <ListItemText>{notes}</ListItemText>
-            <ListItemText>{dueDate}</ListItemText>
+            <ListItemText>{ tempo }</ListItemText>
+            <ListItemText>{ notes }</ListItemText>
+            <ListItemText>{ dueDate }</ListItemText>
             {viewer === 'teacher' &&
               <ListItemSecondaryAction>
                 <IconButton aria-label="Edit" onClick={editToggle}>
                   <EditIcon />
                 </IconButton>
-                <IconButton aria-label="Delete" onClick={() => removeAssignment(id)}>
+                <IconButton aria-label="Delete" onClick={() => removeAssignment(_id)}>
                   <DeleteIcon />
                 </IconButton>
               </ListItemSecondaryAction>

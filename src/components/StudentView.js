@@ -11,6 +11,7 @@ const StudentView = ({ student, assignments, toggleComplete, addAssignment, upda
       <StudentDetails student={ student } viewer={ viewer } />
       <Goals goals={ student.goals } />
       <Assignments
+        student={ student }
         assignments={ assignments }
         toggleComplete={ toggleComplete }
         addAssignment={ addAssignment }
