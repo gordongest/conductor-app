@@ -8,16 +8,16 @@ const StudentView = ({ student, assignments, toggleComplete, addAssignment, upda
 
   return (
     <>
-      <StudentDetails student={ student } viewer={ viewer } />
-      <Goals goals={ student.goals } />
+      <StudentDetails student={student} viewer={viewer} />
+      <Goals goals={student.goals} />
       <Assignments
-        student={ student }
-        assignments={ assignments }
-        toggleComplete={ toggleComplete }
-        addAssignment={ addAssignment }
-        updateAssignment={ updateAssignment }
-        removeAssignment={ removeAssignment }
-        viewer={ viewer }
+        student={student}
+        assignments={assignments}
+        toggleComplete={toggleComplete}
+        addAssignment={addAssignment}
+        updateAssignment={updateAssignment}
+        removeAssignment={removeAssignment}
+        viewer={viewer}
       />
       {/* TODO: ADD BUTTON TO TOGGLE 'ADD ASSIGNMENT' FORM - ACCORDION? */}
       <History />

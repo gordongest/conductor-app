@@ -9,13 +9,12 @@ const AssignmentList = ({ assignments, toggleComplete, updateAssignment, removeA
         return (
           <>
             <AssignmentItem
-              assignment={ assignment }
-              toggleComplete={ toggleComplete }
-              updateAssignment={ updateAssignment }
-              removeAssignment={ removeAssignment }
-              viewer={ viewer }
+              assignment={assignment}
+              toggleComplete={toggleComplete}
+              updateAssignment={updateAssignment}
+              removeAssignment={removeAssignment}
+              viewer={viewer}
             />
-            {/* <Divider /> */}
           </>
         )
       })}

@@ -17,6 +17,7 @@ const Landing = ({ studioData, selectedStudio, handleStudioSelect, addStudio, vi
   const classes = useStyles();
 
   return (
+    // ADD AUTH COMPONENT
     <Paper className={classes.paper}>
 
       <Grid container justify='center' alignItems='center' spacing={3}>

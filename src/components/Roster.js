@@ -11,10 +11,10 @@ const Roster = ({ studioName, students, handleStudentSelect, viewer }) => {
       <List>
         {students.map(student =>
           <StudentLink
-            student={ student }
-            studioUrl={ studioUrl }
-            handleStudentSelect={ handleStudentSelect }
-            viewer={ viewer }
+            student={student}
+            studioUrl={studioUrl}
+            handleStudentSelect={handleStudentSelect}
+            viewer={viewer}
           />
         )}
       </List>

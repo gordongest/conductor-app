@@ -2,7 +2,6 @@ import React, { Component, useState } from 'react';
 
 
 
-
 class ClassExample extends Component {
   constructor(props) {
     super(props)
@@ -19,7 +18,6 @@ class ClassExample extends Component {
     )
   }
 }
-
 
 
 
