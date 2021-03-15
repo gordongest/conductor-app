@@ -95,7 +95,7 @@ const App = props => {
     setAssignments( updatedAssignments );
 
     const data = {
-      student_id: selectedStudent._id,
+      _id: selectedStudent._id,
       assignment_id: assignmentId
     };
 
@@ -117,7 +117,7 @@ const App = props => {
     setAssignments(updatedAssignments);
 
     const data = {
-      student_id: selectedStudent._id,
+      _id: selectedStudent._id,
       assignments: updatedAssignments
     };
 
