@@ -5,6 +5,7 @@ mongoose.connect('mongodb://localhost/mvp_test', {
   useUnifiedTopology: true
 });
 
+// eslint-disable-next-line no-undef
 before(done => {
   mongoose.connection
     .once('open', () => console.log('Connected for tests...'), done())

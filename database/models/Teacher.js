@@ -4,7 +4,7 @@ const { StudioSchema } = require('./Studio')
 
 const TeacherSchema = new Schema({
   teacherName: String,
-  teacherId: Number,
+  teacherId: String,
   studios: [{
     type: Schema.Types.ObjectId,
     ref: 'studio'
