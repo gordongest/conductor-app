@@ -1,6 +1,6 @@
 const assert = require('assert');
 const Teacher = require('../database/models/Teacher');
-const { v4: uuid } = require('uuid');
+const { nanoid } = require('nanoid');
 
 describe('Virtual types', () => {
 
@@ -9,7 +9,7 @@ describe('Virtual types', () => {
   // beforeEach((done) => {
   //   Gordon = new Teacher({
   //     teacherName: "Gordon",
-  //     teacherId: uuid(),
+  //     teacherId: nanoid(),
   //     studios: [{ studioName: 'test' }]
   //   });
 
@@ -20,7 +20,7 @@ describe('Virtual types', () => {
   it('studioCount returns number of studios', (done) => {
     const Gordon = new Teacher({
       teacherName: "Gordon",
-      teacherId: uuid(),
+      teacherId: nanoid(),
       studios: [{ studioName: 'test' }]
     });
 

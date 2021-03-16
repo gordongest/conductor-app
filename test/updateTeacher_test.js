@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { v4: uuid } = require('uuid');
+const { nanoid } = require('nanoid');
 const Teacher = require('../database/models/Teacher');
 
 describe('Updating records in db', () => {
@@ -8,7 +8,7 @@ describe('Updating records in db', () => {
   beforeEach((done) => {
     Gordon = new Teacher({
       teacherName: "Gordon",
-      teacherId: uuid(),
+      teacherId: nanoid(),
       studios: [{ studioName: 'test' }]
     });
 
@@ -80,7 +80,7 @@ describe('Updating records in db', () => {
   it('Can remove an existing subdocument', (done) => {
     const Nodrog = new Teacher({
       teacherName: "Nodrog",
-      teacherId: uuid(),
+      teacherId: nanoid(),
       studios: [ {studioName: 'test'} ]
     });
 

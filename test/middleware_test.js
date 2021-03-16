@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const assert = require('assert');
 const Teacher = require('../database/models/Teacher');
 const Studio = require('../database/models/Studio');

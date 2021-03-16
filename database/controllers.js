@@ -1,12 +1,12 @@
 const Teacher = require('./models/Teacher');
 const Studio = require('./models/Studio');
 const Student = require('./models/Student');
-const helpers = require('./helpers')
+const helpers = require('./helpers');
 
 module.exports = {
   greeting(req, res) {
     console.log('ding')
-    res.send({ response: 'sent' })
+    res.send({ request: 'served' })
   },
 
   getStudios(req, res, next) {

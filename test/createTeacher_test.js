@@ -1,12 +1,12 @@
 const assert = require('assert');
-const { v4: uuid } = require('uuid');
+const { nanoid } = require('nanoid');
 const Teacher = require('../database/models/Teacher');
 
 describe('Creating records in the db', () => {
   it('Adds a teacher to the db', (done) => {
     const Gordon  = new Teacher({
       teacherName: "Gordon",
-      teacherId: uuid(),
+      teacherId: nanoid(),
       studios: []
     });
 
@@ -15,5 +15,5 @@ describe('Creating records in the db', () => {
         assert(!Gordon.isNew);
         done();
       });
-  })
+  });
 });

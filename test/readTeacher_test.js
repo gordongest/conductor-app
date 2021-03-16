@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { v4: uuid } = require('uuid');
+const { nanoid } = require('nanoid');
 const Teacher = require('../database/models/Teacher');
 
 describe('Reading records in the db', () => {
@@ -8,7 +8,7 @@ describe('Reading records in the db', () => {
   beforeEach((done) => {
     Gordon = new Teacher({
       teacherName: "Gordon",
-      teacherId: uuid(),
+      teacherId: nanoid(),
       studios: []
     });
 

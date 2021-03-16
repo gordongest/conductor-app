@@ -19,12 +19,11 @@ app.use(express.static('../client/dist'));
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'build')));
-
-routes(app);
-
 app.use((err, req, res, next) => {
   res.status(422).send({ err: err.message })
 });
+
+routes(app);
 
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
