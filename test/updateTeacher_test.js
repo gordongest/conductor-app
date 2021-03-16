@@ -1,15 +1,15 @@
 const assert = require('assert');
-const { nanoid } = require('nanoid');
 const Teacher = require('../database/models/Teacher');
 
 describe('Updating records in db', () => {
   let Gordon;
+  const testStudio = { studioName: "test" },
+        newStudio = { studioName: "new" };
 
   beforeEach((done) => {
     Gordon = new Teacher({
       teacherName: "Gordon",
-      teacherId: nanoid(),
-      studios: [{ studioName: 'test' }]
+      newStudios: [ testStudio ]
     });
 
     Gordon.save()
@@ -18,7 +18,7 @@ describe('Updating records in db', () => {
 
   const assertName = (promise, update, done) => {
     promise
-      .then(() => Teacher.find({  }))
+      .then(() => Teacher.find({ }))
       .then(teachers => {
         assert(teachers.length === 1);
         assert(teachers[0].teacherName === update);
@@ -28,7 +28,7 @@ describe('Updating records in db', () => {
 
   it('Updates using set/save method', (done) => {
     const update = 'Nodrog';
-    Gordon.set('teacherName', update);
+    Gordon.set("teacherName", update);
     assertName(Gordon.save(), update, done);
   })
 
@@ -40,7 +40,10 @@ describe('Updating records in db', () => {
   it('Updates using model class', (done) => {
     const update = 'Dogron';
     assertName(
-      Teacher.updateOne({ teacherName: 'Gordon' }, { teacherName: update }),
+      Teacher.updateOne(
+        { teacherName: 'Gordon' },
+        { teacherName: update }
+      ),
       update,
       done
     );
@@ -67,12 +70,12 @@ describe('Updating records in db', () => {
   it('Can add a subdocument to the document', (done) => {
     Teacher.findOne({ teacherName: 'Gordon' })
       .then(teacher => {
-        teacher.studios.push({ studioName: 'RMHS' });
+        teacher.newStudios.push( newStudio );
         return teacher.save();
       })
       .then(Teacher.findOne({ teacherName: 'Gordon' }))
       .then(teacher => {
-        assert(teacher.studios[1].studioName === 'RMHS');
+        assert(teacher.newStudios[1].studioName === 'new');
         done();
       });
   });
@@ -80,20 +83,19 @@ describe('Updating records in db', () => {
   it('Can remove an existing subdocument', (done) => {
     const Nodrog = new Teacher({
       teacherName: "Nodrog",
-      teacherId: nanoid(),
-      studios: [ {studioName: 'test'} ]
+      newStudios: [ newStudio ]
     });
 
     Nodrog.save()
       .then(Teacher.findOne({ teacherName: 'Nodrog' }))
       .then(teacher => {
-        const studio = teacher.studios[0];
-        teacher.studios.remove(studio);
+        const studio = teacher.newStudios[0];
+        teacher.newStudios.remove(studio);
         return teacher.save();
       })
       .then(Teacher.findOne({ teacherName: 'Nodrog' }))
       .then(teacher => {
-        assert(teacher.studios.length === 0);
+        assert(teacher.newStudios.length === 0);
         done();
       });
   });

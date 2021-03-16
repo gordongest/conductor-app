@@ -1,5 +1,4 @@
 const assert = require('assert');
-const { nanoid } = require('nanoid');
 const Teacher = require('../database/models/Teacher');
 
 describe('Deleting records from the db', () => {
@@ -7,9 +6,7 @@ describe('Deleting records from the db', () => {
 
   beforeEach((done) => {
     Gordon = new Teacher({
-      teacherName: "Gordon",
-      teacherId: nanoid(),
-      studios: []
+      teacherName: "Gordon"
     });
 
     Gordon.save()
@@ -17,7 +14,7 @@ describe('Deleting records from the db', () => {
   });
 
   it('Removes using model instance', (done) => {
-    Gordon.remove()
+    Gordon.deleteOne()
       .then(() => Teacher.findOne({ teacherName: "Gordon" }))
       .then(teacher => {
         assert(teacher === null);

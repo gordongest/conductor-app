@@ -1,22 +1,22 @@
 const assert = require('assert');
 const Teacher = require('../database/models/Teacher');
-const Studio = require('../database/models/Studio');
+const { Studio } = require('../database/models/Studio');
 
 describe('Middleware', () => {
-  let gordon, hehs;
+  let Gordon, hehs;
 
   beforeEach((done) => {
-    gordon = new Teacher({ teacherName: 'Gordon' });
+    Gordon = new Teacher({ teacherName: 'Gordon' });
     hehs = new Studio({ studioName: 'HEHS', location: 'Hoffman Estates, IL', days: [ 'Wednesday' ] });
 
-    gordon.newStudios.push(hehs);
+    Gordon.studios.push(hehs);
 
-    Promise.all([gordon.save(), hehs.save()])
+    Promise.all([Gordon.save(), hehs.save()])
       .then(() => done());
   });
 
-  it('Teachers clean up dangling studios on remove', done => {
-    gordon.remove()
+  it('Teachers clean up dangling studios on delete', done => {
+    Gordon.remove()
       .then(() => Studio.countDocuments())
       .then(count => {
         assert(count === 0);

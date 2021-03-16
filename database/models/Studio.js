@@ -12,6 +12,12 @@ const StudioSchema = new Schema({
   }]
 });
 
+StudioSchema.virtual('size').get(function() {
+  return this.students.length;
+});
+
 const Studio = mongoose.model('studio', StudioSchema);
 
-module.exports = Studio;
+module.exports = {
+  StudioSchema, Studio
+};

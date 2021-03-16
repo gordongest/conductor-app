@@ -1,6 +1,6 @@
 const assert = require('assert');
 const Teacher = require('../database/models/Teacher');
-const Studio = require('../database/models/Studio');
+const { Studio } = require('../database/models/Studio');
 const Student = require('../database/models/Student');
 
 describe('Associations', ()=> {
@@ -13,7 +13,7 @@ describe('Associations', ()=> {
     jackie = new Student({ studentName: 'Jackie' });
 
 
-    gordon.newStudios.push(hehs);
+    gordon.studios.push(hehs);
     hehs.students.push(jackie);
     jackie.studio = hehs;
     jackie.assignments.push({
@@ -30,9 +30,9 @@ describe('Associations', ()=> {
 
   it('saves a relation between a teacher and studio', (done) => {
     Teacher.findOne({ teacherName: 'Gordon' })
-      .populate('newStudios')
+      .populate('studios')
       .then((teacher) => {
-        assert(teacher.newStudios[0].studioName === "HEHS");
+        assert(teacher.studios[0].studioName === "HEHS");
         done();
       })
   });
@@ -40,7 +40,7 @@ describe('Associations', ()=> {
   it('saves a full relation graph', done => {
     Teacher.findOne({ teacherName: 'Gordon' })
       .populate({
-        path: 'newStudios',
+        path: 'studios',
         populate: {
           path: 'students',
           model: 'student',
@@ -55,14 +55,14 @@ describe('Associations', ()=> {
           notes: 'blow across technical passages',
           completed: false
         }
-        teacher.newStudios[0].students[0].assignments.push(assignment);
+        teacher.studios[0].students[0].assignments.push(assignment);
         return teacher.save();
       })
       .then(teacher => {
-        assert(teacher.newStudios[0].students[0].assignments.length === 2);
+        assert(teacher.studios[0].students[0].assignments.length === 2);
         assert(teacher.teacherName === 'Gordon');
-        assert(teacher.newStudios[0].studioName === 'HEHS');
-        assert(teacher.newStudios[0].students[0].studentName === 'Jackie');
+        assert(teacher.studios[0].studioName === 'HEHS');
+        assert(teacher.studios[0].students[0].studentName === 'Jackie');
         done();
       })
   })

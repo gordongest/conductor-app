@@ -1,5 +1,4 @@
 const assert = require('assert');
-const { nanoid } = require('nanoid');
 const Teacher = require('../database/models/Teacher');
 
 describe('Reading records in the db', () => {
@@ -7,9 +6,7 @@ describe('Reading records in the db', () => {
 
   beforeEach((done) => {
     Gordon = new Teacher({
-      teacherName: "Gordon",
-      teacherId: nanoid(),
-      studios: []
+      teacherName: "Gordon"
     });
 
     Gordon.save()
