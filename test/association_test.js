@@ -4,19 +4,18 @@ const { Studio } = require('../database/models/Studio');
 const Student = require('../database/models/Student');
 
 describe('Associations', ()=> {
-
-  let gordon, hehs, jackie;
+  let Gordon, HEHS, Jackie;
 
   beforeEach((done) => {
-    gordon = new Teacher({ teacherName: 'Gordon' });
-    hehs = new Studio({ studioName: 'HEHS', location: 'Hoffman Estates, IL', days: [ 'Wednesday' ] });
-    jackie = new Student({ studentName: 'Jackie' });
+    Gordon = new Teacher({ teacherName: 'Gordon' });
+    HEHS = new Studio({ studioName: 'HEHS', location: 'Hoffman Estates, IL', days: [ 'Wednesday' ] });
+    Jackie = new Student({ studentName: 'Jackie' });
 
 
-    gordon.studios.push(hehs);
-    hehs.students.push(jackie);
-    jackie.studio = hehs;
-    jackie.assignments.push({
+    Gordon.studios.push(HEHS);
+    HEHS.students.push(Jackie);
+    Jackie.studio = HEHS;
+    Jackie.assignments.push({
       title: 'Rose Etude 10',
       tempo: 84,
       dueDate: '01/31/21',
@@ -24,7 +23,7 @@ describe('Associations', ()=> {
       completed: false
     });
 
-    Promise.all([gordon.save(), hehs.save(), jackie.save()])
+    Promise.all([Gordon.save(), HEHS.save(), Jackie.save()])
       .then(() => done());
   });
 
@@ -65,6 +64,5 @@ describe('Associations', ()=> {
         assert(teacher.studios[0].students[0].studentName === 'Jackie');
         done();
       })
-  })
-
+  });
 });
