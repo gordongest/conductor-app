@@ -4,7 +4,7 @@ const Teacher = require('../database/models/Teacher');
 describe('Deleting records from the db', () => {
   let Gordon;
 
-  beforeEach((done) => {
+  beforeEach(done => {
     Gordon = new Teacher({
       teacherName: "Gordon"
     });
@@ -13,7 +13,7 @@ describe('Deleting records from the db', () => {
       .then(() => done());
   });
 
-  it('Removes using model instance', (done) => {
+  it('Removes using model instance', done => {
     Gordon.deleteOne()
       .then(() => Teacher.findOne({ teacherName: "Gordon" }))
       .then(teacher => {
@@ -22,7 +22,7 @@ describe('Deleting records from the db', () => {
       });
   });
 
-  it('Removes using class instance', (done) => {
+  it('Removes using class instance', done => {
     Teacher.deleteMany({ teacherName: 'Gordon' })
       .then(() => Teacher.findOne({ teacherName: "Gordon" }))
       .then(teacher => {
@@ -31,7 +31,7 @@ describe('Deleting records from the db', () => {
       });
   });
 
-  it('Removes using findOneAndDelete', (done) => {
+  it('Removes using findOneAndDelete', done => {
     Teacher.findOneAndDelete({ teacherName: 'Gordon' })
       .then(() => Teacher.findOne({ teacherName: "Gordon" }))
       .then(teacher => {
@@ -40,7 +40,7 @@ describe('Deleting records from the db', () => {
       });
   });
 
-  it('Removes using findByIdAndDelete', (done) => {
+  it('Removes using findByIdAndDelete', done => {
     Teacher.findByIdAndDelete(Gordon._id)
       .then(() => Teacher.findOne({ teacherName: "Gordon" }))
       .then(teacher => {
@@ -48,5 +48,4 @@ describe('Deleting records from the db', () => {
         done();
       });
   });
-
 });

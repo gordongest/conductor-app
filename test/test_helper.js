@@ -5,7 +5,7 @@ mongoose.connect('mongodb://localhost/mvp_test', {
   useUnifiedTopology: true
 });
 
-before((done) => {
+before(done => {
   mongoose.connection
     .once('open', () => console.log('Connected for tests...'), done())
     .on('error', err => {
@@ -13,7 +13,7 @@ before((done) => {
     });
 });
 
-beforeEach((done) => {
+beforeEach(done => {
   const { teachers, studios, students } = mongoose.connection.collections;
   teachers.drop(() => {
     studios.drop(() => {

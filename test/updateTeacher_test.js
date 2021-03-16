@@ -6,7 +6,7 @@ describe('Updating records in db', () => {
   const testStudio = { studioName: "test" },
         newStudio = { studioName: "new" };
 
-  beforeEach((done) => {
+  beforeEach(done => {
     Gordon = new Teacher({
       teacherName: "Gordon",
       newStudios: [ testStudio ]
@@ -24,20 +24,20 @@ describe('Updating records in db', () => {
         assert(teachers[0].teacherName === update);
         done();
       });
-  }
+  };
 
-  it('Updates using set/save method', (done) => {
+  it('Updates using set/save method', done => {
     const update = 'Nodrog';
     Gordon.set("teacherName", update);
     assertName(Gordon.save(), update, done);
-  })
+  });
 
-  it('Updates using model update function', (done) => {
+  it('Updates using model update function', done => {
     const update = 'Dorgon';
     assertName(Gordon.updateOne({ teacherName: update }), update, done);
-  })
+  });
 
-  it('Updates using model class', (done) => {
+  it('Updates using model class', done => {
     const update = 'Dogron';
     assertName(
       Teacher.updateOne(
@@ -49,7 +49,7 @@ describe('Updating records in db', () => {
     );
   });
 
-  it('Can update one record', (done) => {
+  it('Can update one record', done => {
     const update = 'Rognod';
     assertName(
       Teacher.findOneAndUpdate({ teacherName: 'Gordon' }, { teacherName: update }),
@@ -58,7 +58,7 @@ describe('Updating records in db', () => {
     );
   });
 
-  it('Can find a record with a MongoDB _id and update', (done) => {
+  it('Can find a record with a MongoDB _id and update', done => {
     const update = 'Goornd';
     assertName(
       Teacher.findByIdAndUpdate(Gordon._id, { teacherName: update }),
@@ -67,7 +67,7 @@ describe('Updating records in db', () => {
     );
   });
 
-  it('Can add a subdocument to the document', (done) => {
+  it('Can add a subdocument to the document', done => {
     Teacher.findOne({ teacherName: 'Gordon' })
       .then(teacher => {
         teacher.newStudios.push( newStudio );
@@ -80,7 +80,7 @@ describe('Updating records in db', () => {
       });
   });
 
-  it('Can remove an existing subdocument', (done) => {
+  it('Can remove an existing subdocument', done => {
     const Nodrog = new Teacher({
       teacherName: "Nodrog",
       newStudios: [ newStudio ]
@@ -99,5 +99,4 @@ describe('Updating records in db', () => {
         done();
       });
   });
-
 });

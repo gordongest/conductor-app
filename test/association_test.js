@@ -3,10 +3,10 @@ const Teacher = require('../database/models/Teacher');
 const { Studio } = require('../database/models/Studio');
 const Student = require('../database/models/Student');
 
-describe('Associations', ()=> {
+describe('Associations', () => {
   let Gordon, HEHS, Jackie;
 
-  beforeEach((done) => {
+  beforeEach(done => {
     Gordon = new Teacher({ teacherName: 'Gordon' });
     HEHS = new Studio({ studioName: 'HEHS', location: 'Hoffman Estates, IL', days: [ 'Wednesday' ] });
     Jackie = new Student({ studentName: 'Jackie' });
@@ -27,13 +27,13 @@ describe('Associations', ()=> {
       .then(() => done());
   });
 
-  it('saves a relation between a teacher and studio', (done) => {
+  it('saves a relation between a teacher and studio', done => {
     Teacher.findOne({ teacherName: 'Gordon' })
       .populate('studios')
       .then((teacher) => {
         assert(teacher.studios[0].studioName === "HEHS");
         done();
-      })
+      });
   });
 
   it('saves a full relation graph', done => {
@@ -63,6 +63,6 @@ describe('Associations', ()=> {
         assert(teacher.studios[0].studioName === 'HEHS');
         assert(teacher.studios[0].students[0].studentName === 'Jackie');
         done();
-      })
+      });
   });
 });

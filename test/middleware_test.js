@@ -3,15 +3,15 @@ const Teacher = require('../database/models/Teacher');
 const { Studio } = require('../database/models/Studio');
 
 describe('Middleware', () => {
-  let Gordon, hehs;
+  let Gordon, HEHS;
 
-  beforeEach((done) => {
+  beforeEach(done => {
     Gordon = new Teacher({ teacherName: 'Gordon' });
-    hehs = new Studio({ studioName: 'HEHS', location: 'Hoffman Estates, IL', days: [ 'Wednesday' ] });
+    HEHS = new Studio({ studioName: 'HEHS', location: 'Hoffman Estates, IL', days: [ 'Wednesday' ] });
 
-    Gordon.studios.push(hehs);
+    Gordon.studios.push(HEHS);
 
-    Promise.all([Gordon.save(), hehs.save()])
+    Promise.all([Gordon.save(), HEHS.save()])
       .then(() => done());
   });
 

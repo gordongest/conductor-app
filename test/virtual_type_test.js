@@ -3,12 +3,12 @@ const Teacher = require('../database/models/Teacher');
 
 describe('Virtual types', () => {
 
+  // REFACTORED, NOT USING HOOK
   // let Gordon;
 
   // beforeEach((done) => {
   //   Gordon = new Teacher({
   //     teacherName: "Gordon",
-  //     teacherId: nanoid(),
   //     studios: [{ studioName: 'test' }]
   //   });
 
@@ -16,7 +16,7 @@ describe('Virtual types', () => {
   //     .then(() => done());
   // });
 
-  it('studioCount returns number of studios', (done) => {
+  it('studioCount returns number of studios', done => {
     const Gordon = new Teacher({
       teacherName: "Gordon",
       newStudios: []
@@ -33,5 +33,4 @@ describe('Virtual types', () => {
         done();
       });
   });
-
 });
