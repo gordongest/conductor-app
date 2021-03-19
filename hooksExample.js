@@ -1,29 +1,28 @@
 import React, { Component, useState } from 'react';
 
-
-
 class ClassExample extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
-      name: 'Adam'
-    }
-  }
+      name: 'John Doe'
+    };
+  };
 
   render() {
 
-    return (
-      <ChildComponent name={this.state.name} />
-    )
-  }
-}
+    const { name } = this.state;
 
+    return (
+      <ChildComponent name={name} />
+    )
+  };
+};
 
 
 const HooksExample = () => {
 
-  const [name, setName] = useState('Adam')
+  const [ name, setName ] = useState('John Doe')
 
   return (
     <ChildComponent name={name} />
