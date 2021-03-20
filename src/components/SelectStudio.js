@@ -8,16 +8,15 @@ import GoButton from './GoButton';
 
 const SelectStudio = ({ studioData, selectedStudio, handleStudioSelect, viewer }) => {
 
-  const [ studio, setStudio ] = useState();
+  const [ studio, setStudio ] = useState(selectedStudio._id)
 
   const handleChange = e => {
-    setStudio( e.target.value )
-    handleStudioSelect( e.target.value )
+    setStudio(e.target.value)
+    handleStudioSelect(e.target.value)
   }
   const url = `/${viewer}/` + selectedStudio.studioName.toLowerCase().replace(/\s+/g, '');
 
   return (
-
     <Grid container direction='row' justify='space-between' alignItems="flex-end" spacing={2}>
       <Grid item xs={10}>
         <FormControl fullWidth>
@@ -25,12 +24,12 @@ const SelectStudio = ({ studioData, selectedStudio, handleStudioSelect, viewer }
           <Select
             labelId="studio-select-label"
             id="studio-select"
-            value={studio}
             onChange={handleChange}
+            value={studio}
             fullWidth
           >
             {studioData.map(studio => {
-              return <MenuItem value={studio._id}>{studio.studioName}</MenuItem>
+              return <MenuItem value={studio._id} name={studio.studioName} key={studio._id}>{studio.studioName}</MenuItem>
             })}
           </Select>
         </FormControl>

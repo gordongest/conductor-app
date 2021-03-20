@@ -1,5 +1,5 @@
 const Teacher = require('./models/Teacher');
-const Studio = require('./models/Studio');
+const { Studio } = require('./models/Studio');
 const Student = require('./models/Student');
 const helpers = require('./helpers');
 

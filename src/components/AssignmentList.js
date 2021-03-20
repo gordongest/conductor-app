@@ -7,15 +7,14 @@ const AssignmentList = ({ assignments, toggleComplete, updateAssignment, removeA
     <List>
       {assignments.map(assignment => {
         return (
-          <>
-            <AssignmentItem
-              assignment={assignment}
-              toggleComplete={toggleComplete}
-              updateAssignment={updateAssignment}
-              removeAssignment={removeAssignment}
-              viewer={viewer}
-            />
-          </>
+          <AssignmentItem
+            assignment={assignment}
+            toggleComplete={toggleComplete}
+            updateAssignment={updateAssignment}
+            removeAssignment={removeAssignment}
+            viewer={viewer}
+            key={assignment._id}
+          />
         )
       })}
     </List>

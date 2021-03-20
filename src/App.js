@@ -135,6 +135,7 @@ const App = props => {
 
   return (
     <>
+      {console.log(studioData)}
       <Paper className={classes.paper} elevation={0}>
 
         <Navbar />

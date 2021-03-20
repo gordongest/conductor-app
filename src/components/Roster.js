@@ -4,7 +4,7 @@ import StudentLink from './StudentLink';
 
 const Roster = ({ studioName, students, handleStudentSelect, viewer }) => {
 
-  const studioUrl= studioName.toLowerCase().replace(/\s+/g, '')
+  const studioUrl = studioName.toLowerCase().replace(/\s+/g, '')
 
   return (
     <>
@@ -15,6 +15,7 @@ const Roster = ({ studioName, students, handleStudentSelect, viewer }) => {
             studioUrl={studioUrl}
             handleStudentSelect={handleStudentSelect}
             viewer={viewer}
+            key={student._id}
           />
         )}
       </List>

@@ -29,7 +29,6 @@ const AssignmentItem = ({ assignment, toggleComplete, updateAssignment, removeAs
           />
          ) : (
           <>
-            {/* ADD ADDITIONAL CHECKBOX FOR TEACHER VERIFICATION */}
             <Checkbox tabIndex={-1} checked={completed} onClick={() => toggleComplete(_id)} />
             <ListItemText
               style={{ textDecoration:  completed ? 'line-through' : 'none' }}>
@@ -38,6 +37,7 @@ const AssignmentItem = ({ assignment, toggleComplete, updateAssignment, removeAs
             <ListItemText>{tempo}</ListItemText>
             <ListItemText>{notes}</ListItemText>
             <ListItemText>{dueDate}</ListItemText>
+            {/* ADD ADDITIONAL CHECKBOX FOR TEACHER VERIFICATION */}
             {viewer === 'teacher' &&
               <ListItemSecondaryAction>
                 <IconButton aria-label="Edit" onClick={editToggle}>

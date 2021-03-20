@@ -24,12 +24,12 @@ const ViewerSelect = () => {
         <Grid item xs={12}>
           <Grid container direction='row' justify='space-around' spacing={2}>
             <Grid item>
-              <Link exact to='/teacher'>
+              <Link to='/teacher'>
                 <Button className={classes.button} size='large' variant='contained' color='primary'>Teacher</Button>
               </Link>
             </Grid>
             <Grid item>
-              <Link exact to='/student'>
+              <Link to='/student'>
                 <Button className={classes.button} size='large' variant='contained' color='primary'>Student</Button>
               </Link>
             </Grid>

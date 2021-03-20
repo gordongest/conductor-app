@@ -4,6 +4,7 @@ import ViewerSelect from './ViewerSelect';
 import Landing from './Landing';
 import StudioView from './StudioView';
 import StudentView from './StudentView';
+import NotFound from './NotFound';
 
 const Routes = props => {
 
@@ -27,7 +28,7 @@ const Routes = props => {
 
       <Route exact path='/' render={() => <ViewerSelect />} />
 
-      <Route exact path='/teacher' component={() =>
+      <Route exact path='/teacher' render={() =>
         <Landing
           studioData={studioData}
           selectedStudio={selectedStudio}
@@ -87,6 +88,8 @@ const Routes = props => {
           viewer='student'
         />
       }/>
+
+      <Route render={() => <NotFound />} />
 
     </Switch>
   )

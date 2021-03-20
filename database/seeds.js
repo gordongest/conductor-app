@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const faker = require('faker');
 const Teacher = require('./models/Teacher');
-const Studio = require('./models/Studio');
+const { Studio } = require('./models/Studio');
 const Student = require('./models/Student');
 
 mongoose.connect('mongodb://localhost/mvp_test', {
@@ -166,18 +166,19 @@ const writeSeeds = () => {
   })
 
 
-  gordon.save();
-
-  hehs.save();
-  mic.save();
-  northcentral.save();
-  depaul.save();
-
-  jackie.save();
-  grant.save();
-  cora.save();
-  rich.save();
-  sam.save();
+  Promise.all([
+    gordon.save(),
+    hehs.save(),
+    mic.save(),
+    northcentral.save(),
+    depaul.save(),
+    jackie.save(),
+    grant.save(),
+    cora.save(),
+    rich.save(),
+    sam.save(),
+  ])
+    .then(results => console.log(results))
 
 }
 

@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button'
 const GoButton = ({ route, text }) => {
   return (
     <Link to={route} >
-    {console.log(route)}
       <Button
         variant="contained"
         size='large'

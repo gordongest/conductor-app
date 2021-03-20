@@ -19,7 +19,7 @@ const AddStudent = () => {
         Add Student
       </Button>
 
-      <div className="modal fade" id="addStudentModal" tabindex="-1" role="dialog" aria-labelledby="addStudentModal" aria-hidden="true">
+      <div className="modal fade" id="addStudentModal" tabIndex="-1" role="dialog" aria-labelledby="addStudentModal" aria-hidden="true">
         <div className="modal-dialog modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
@@ -32,8 +32,8 @@ const AddStudent = () => {
               ADD STUDENT FORM
             </div>
             <div className="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" className="btn btn-primary">Save changes</button>
             </div>
           </div>
         </div>
